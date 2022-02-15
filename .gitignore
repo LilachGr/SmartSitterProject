@@ -1,10 +1,6 @@
-SmartSitterClient/app/src/androidTest
-SmartSitterClient/app/src/test
-SmartSitterClient/.gitignore
 .idea
 *.iml
 .gradle
-/local.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -13,6 +9,13 @@ SmartSitterClient/.gitignore
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
-/captures
+debug
+captures
 .externalNativeBuild
 .cxx
+local.properties
+debug-mergeJavaRes/
+debug-mergeNativeLibs/
+compileDebugKotlin
+/‏‏SmartSitterClient/app/src/test
+/‏‏SmartSitterClient/app/src/androidTest
