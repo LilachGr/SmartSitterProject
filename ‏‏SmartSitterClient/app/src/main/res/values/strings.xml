@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SmartSitterClient</string>
+    <string name="button">Button</string>
+    <string name="this_is_second_page">This is second page!!!!!!!!!!!</string>
+    <string name="send">Send</string>
+    <string name="enter_any_text">enter any text</string>
+</resources>
