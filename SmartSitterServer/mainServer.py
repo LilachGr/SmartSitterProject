@@ -9,13 +9,11 @@ def show_home_page():
     return "This is home page"
 
 
-@app.route("/debug", methods=["POST"])
+@app.route("/reservation", methods=["POST"])
 def debug():
-    text = request.form["sample"]
-    text2 = request.form["hello"]
+    text = request.form["reservationBasicDetails"]
 
     print(text)
-    print(text2)
     return "received"
 
 

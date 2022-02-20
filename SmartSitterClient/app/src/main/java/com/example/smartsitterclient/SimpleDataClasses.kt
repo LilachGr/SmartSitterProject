@@ -1,3 +1,7 @@
 package com.example.smartsitterclient
 
-data class ReservationBasicDetails(var name: String, var surname: String, var id: String)
+const val serverIP = "http://10.100.102.10:5000/"
+const val serverReservationFirstStep = "reservation"
+
+data class ReservationBasicDetails(var userNameStudent: String, var dateReservation: String, var timeReservation: String,
+                                   var NumberOfStudent: String)

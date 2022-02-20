@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity() {
         // creating a client
         val okHttpClient = OkHttpClient()
         // building a request
-        //val request: Request = Request.Builder().url("http://10.100.102.10:5000/").build()
-        val request: Request = Request.Builder().url("http://10.100.102.10:5000/").build()
+        val request: Request = Request.Builder().url(serverIP).build()
         // making call asynchronously
         okHttpClient.newCall(request).enqueue(object : Callback {
             // called if server is unreachable
