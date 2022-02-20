@@ -12,9 +12,10 @@ def show_home_page():
 @app.route("/reservation", methods=["POST"])
 def debug():
     text = request.form["reservationBasicDetails"]
-
+    # run the code to decide which option to choose: 'reservation_now' or 'reservation_later'.
     print(text)
-    return "received"
+    return "reservation_now"
+    #return "reservation_later"
 
 
 if __name__ == "__main__":

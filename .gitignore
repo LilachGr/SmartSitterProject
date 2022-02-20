@@ -25,3 +25,4 @@ compileDebugKotlin
 /SmartSitterClient/app/src/androidTest/java/com/example/smartsitterclient/ExampleInstrumentedTest.kt
 /SmartSitterClient/app/build/outputs/logs/manifest-merger-debug-report.txt
 /SmartSitterClient/app/build/intermediates/incremental/processDebugResources/
+/SmartSitterClient/app/build/intermediates/*/debugAndroidTest/
