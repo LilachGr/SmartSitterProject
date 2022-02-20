@@ -19,3 +19,9 @@ debug-mergeNativeLibs/
 compileDebugKotlin
 /‏‏SmartSitterClient/app/src/test
 /‏‏SmartSitterClient/app/src/androidTest
+/SmartSitterClient/app/build/intermediates/incremental/mergeDebug*
+/_.idea
+/SmartSitterClient/app/src/test/java/com/example/smartsitterclient/ExampleUnitTest.kt
+/SmartSitterClient/app/src/androidTest/java/com/example/smartsitterclient/ExampleInstrumentedTest.kt
+/SmartSitterClient/app/build/outputs/logs/manifest-merger-debug-report.txt
+/SmartSitterClient/app/build/intermediates/incremental/processDebugResources/

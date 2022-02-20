@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-            android:text="@string/button"
+            android:text="@string/reservation"
             android:layout_width="118dp"
             android:layout_height="44dp"
             android:id="@+id/button1" app:layout_constraintTop_toTopOf="parent"

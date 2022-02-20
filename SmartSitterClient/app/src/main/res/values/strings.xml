@@ -4,4 +4,9 @@
     <string name="this_is_second_page">This is second page!!!!!!!!!!!</string>
     <string name="send">Send</string>
     <string name="enter_any_text">enter any text</string>
+    <string name="reservation">Reservation</string>
+    <string name="user_name">User name</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="number_of_students">Number of students</string>
 </resources>
