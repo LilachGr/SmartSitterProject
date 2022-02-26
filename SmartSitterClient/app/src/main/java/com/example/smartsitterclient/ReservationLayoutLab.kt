@@ -1,13 +1,10 @@
 package com.example.smartsitterclient
 
-import android.os.Bundle
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import okhttp3.*
-import okhttp3.FormBody
-import java.io.IOException
 import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 
 class ReservationLayoutLab : AppCompatActivity() {
@@ -25,16 +22,19 @@ class ReservationLayoutLab : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_layout_lab)
 
-        val result = ReservationFirstStepActivity()
-        val date = result.dateReservation
-        val time = result.timeReservation
-        val num = result.studentsNumber
         viewDateTime = findViewById(R.id.dateTime)
 
-        val localViewDateTime = viewDateTime
-        val tempText = "Date: " + date.toString() + ", Time: " + time.toString() + "\nNumber of Students:" + num.toString()
-        localViewDateTime?.text = tempText
-        viewDateTime = localViewDateTime
+        val extras = intent.extras
+        if (extras != null) {
+            val localViewDateTime = viewDateTime
+            val time = extras.getString("time")
+            var date = extras.getString("date")
+            val num = extras.getString("num")
+            date = date.toString()
+            val tempText = "Date: $date, Time: $time\nNumber of Students:$num"
+            localViewDateTime?.text = tempText
+            viewDateTime = localViewDateTime
+        }
 
         buttonClick22 = findViewById(R.id.send_location)
         val localButtonClick22 = buttonClick22
