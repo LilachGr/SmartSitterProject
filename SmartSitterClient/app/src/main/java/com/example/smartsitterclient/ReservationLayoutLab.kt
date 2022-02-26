@@ -11,20 +11,32 @@ import android.content.Intent
 
 
 class ReservationLayoutLab : AppCompatActivity() {
-    private var userName: EditText? = null
-    private var dateReservation: EditText? = null
-    private var timeReservation: EditText? = null
-    private var studentsNumber: EditText? = null
-    private var sendButton: Button? = null
-    private var okHttpClient: OkHttpClient? = null
-    private val mapper = jacksonObjectMapper()
+//    private var userName: EditText? = null
+//    //private var dateReservation: EditText? = null
+//    private var timeReservation: EditText? = null
+//    private var studentsNumber: EditText? = null
+//    private var sendButton: Button? = null
+//    private var okHttpClient: OkHttpClient? = null
+//    private val mapper = jacksonObjectMapper()
     private var buttonClick22: Button? = null
+    private var viewDateTime: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_reservation_layout_lab)
-        buttonClick22 = findViewById(R.id.send_reservatio22n)
+
+        val result = ReservationFirstStepActivity()
+        val date = result.dateReservation
+        val time = result.timeReservation
+        val num = result.studentsNumber
+        viewDateTime = findViewById(R.id.dateTime)
+
+        val localViewDateTime = viewDateTime
+        val tempText = "Date: " + date.toString() + ", Time: " + time.toString() + "\nNumber of Students:" + num.toString()
+        localViewDateTime?.text = tempText
+        viewDateTime = localViewDateTime
+
+        buttonClick22 = findViewById(R.id.send_location)
         val localButtonClick22 = buttonClick22
         localButtonClick22?.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

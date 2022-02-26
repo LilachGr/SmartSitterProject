@@ -12,14 +12,15 @@ import android.content.Intent
 
 class ReservationFirstStepActivity : AppCompatActivity() {
     private var userName: EditText? = null
-    private var dateReservation: EditText? = null
-    private var timeReservation: EditText? = null
-    private var studentsNumber: EditText? = null
+    var dateReservation: EditText? = null
+    var timeReservation: EditText? = null
+    var studentsNumber: EditText? = null
     private var sendButton: Button? = null
     private var okHttpClient: OkHttpClient? = null
     private var myServerResponse: String? = null
     private var reservationLaterMessage: TextView? = null
     private var thisReservationActivity: ReservationFirstStepActivity? = null
+    private var nextButton: Button? = null
 
     //private var dropdown: Spinner? = null
     private val mapper = jacksonObjectMapper()
@@ -50,6 +51,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
         reservationLaterMessage = findViewById(R.id.reservation_later_message)
         sendButton = findViewById(R.id.send_reservation)
+        nextButton = findViewById(R.id.next_button)
         okHttpClient = OkHttpClient()
         val localButton = sendButton
         localButton?.setOnClickListener {
@@ -74,27 +76,52 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                     runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
                 }
 
-
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
-                    if (response.body!!.string() == "reservation_now") {
-                        myServerResponse = "reservation_now"
-                        runOnUiThread {
-                            Toast.makeText(applicationContext, "data received", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(thisReservationActivity, ReservationLayoutLab::class.java))
-                        }
+                    runOnUiThread {
+                        val temo_string_server = response.body!!.string()
+                        Toast.makeText(applicationContext, temo_string_server, Toast.LENGTH_SHORT).show()
                     }
-                    if (response.body!!.string() == "reservation_later") {
-                        myServerResponse = "reservation_later"
-                        runOnUiThread {
-                            Toast.makeText(applicationContext, "Your reservation will be answered in a later time",
-                                Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(thisReservationActivity, MainActivity::class.java))
-                        }
-                    }
+//                    if (temo_string_server == "reservation_now") {
+//                        //myServerResponse = "reservation_now"
+//                        runOnUiThread {
+//                            Toast.makeText(applicationContext, "data received", Toast.LENGTH_SHORT).show()
+//                            //startActivity(Intent(thisReservationActivity, ReservationLayoutLab::class.java))
+//                        }
+//                    }
+//                    if (temo_string_server == "reservation_later") {
+//                        myServerResponse = "reservation_later"
+//                        runOnUiThread {
+//                            Toast.makeText(applicationContext, "Your reservation will be answered in a later time",
+//                                Toast.LENGTH_SHORT).show()
+//                            //startActivity(Intent(thisReservationActivity, MainActivity::class.java))
+//                        }
+//                    }
                 }
             })
+
         }
         sendButton = localButton
+
+        val localNextButton = nextButton
+        localNextButton?.setOnClickListener {
+            startActivity(Intent(this, ReservationLayoutLab::class.java))
+//            if (myServerResponse == "reservation_now") {
+//                startActivity(Intent(this, ReservationLayoutLab::class.java))
+//                finish()
+//            } else if (myServerResponse == "reservation_later") {
+//                startActivity(Intent(thisReservationActivity, MainActivity::class.java))
+//                finish()
+//            }
+        }
+        nextButton = localNextButton
+
+        val localViewDateTime = reservationLaterMessage
+        val date = dateReservation
+        val time = timeReservation
+        val num = studentsNumber
+        val tempText = "Date: " + date.toString() + "Time: " + time.toString() + "\nNumber of Students:" + num.toString()
+        localViewDateTime?.text = tempText
+        reservationLaterMessage = localViewDateTime
     }
 }

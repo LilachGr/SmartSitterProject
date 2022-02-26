@@ -9,4 +9,7 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="number_of_students">Number of students</string>
+    <string name="time_format_h_m">Time (HH:MM)</string>
+    <string name="date_format_d_m_y">Date (DD/MM/YY)</string>
+    <string name="next">next</string>
 </resources>
