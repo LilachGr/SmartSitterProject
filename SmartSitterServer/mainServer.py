@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from algorithms import choose_flow
 
 app = Flask(__name__)
 
@@ -10,20 +11,10 @@ def show_home_page():
 
 
 @app.route("/reservation", methods=["POST"])
-def debug():
+def reservation_func():
     text = request.form["reservationBasicDetails"]
-    # run the code to decide which option to choose: 'reservation_now' or 'reservation_later'.
-    print(text)
-    return "reservation_now"
-    #return "reservation_later"
+    return choose_flow(text)
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-
-
-"""@app.route("/", methods=['GET', 'POST'])
-def handle_request():
-    # response from the server
-    return "This is home page"""
-
