@@ -1,5 +1,5 @@
 import pyodbc
-import config as c
+import configServer as c
 
 """
     function that create connection.
