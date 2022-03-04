@@ -28,3 +28,4 @@ compileDebugKotlin
 /SmartSitterClient/app/build/intermediates/*/debugAndroidTest/
 /SmartSitterServer/__pycache__/algorithms.cpython-38.pyc
 /SmartSitterServer/__pycache__/
+/SmartSitterServer/config.py
