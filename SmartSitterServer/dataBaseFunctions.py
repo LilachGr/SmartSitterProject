@@ -1,5 +1,5 @@
 import pyodbc
-import configServer as c
+import configServer as c # File with the correct parameters for connection to DB, to get the file please contact Lilach.
 
 """
     function that create connection.
