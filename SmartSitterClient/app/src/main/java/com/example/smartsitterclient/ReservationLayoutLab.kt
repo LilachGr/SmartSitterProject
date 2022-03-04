@@ -30,8 +30,9 @@ class ReservationLayoutLab : AppCompatActivity() {
             val time = extras.getString("time")
             var date = extras.getString("date")
             val num = extras.getString("num")
+            val duration = extras.getString("duration")
             date = date.toString()
-            val tempText = "Date: $date, Time: $time\nNumber of Students:$num"
+            val tempText = "Date: $date, Time: $time, Duration: $duration\nNumber of Students:$num"
             localViewDateTime?.text = tempText
             viewDateTime = localViewDateTime
         }

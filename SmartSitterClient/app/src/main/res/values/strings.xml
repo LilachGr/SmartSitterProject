@@ -12,4 +12,5 @@
     <string name="time_format_h_m">Time (HH:MM)</string>
     <string name="date_format_d_m_y">Date (DD/MM/YY)</string>
     <string name="next">next</string>
+    <string name="for_how_long_should_dby_in_minutes">For how long? (minutes)</string>
 </resources>

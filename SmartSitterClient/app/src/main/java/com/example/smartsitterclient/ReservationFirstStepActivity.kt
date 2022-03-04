@@ -11,13 +11,17 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.*
 import okhttp3.FormBody
 import java.io.IOException
-
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
 
 class ReservationFirstStepActivity : AppCompatActivity() {
     private var userName: EditText? = null
-    var dateReservation: EditText? = null
-    var timeReservation: EditText? = null
-    var studentsNumber: EditText? = null
+    private var dateReservation: EditText? = null
+    private var timeReservation: EditText? = null
+    private var studentsNumber: EditText? = null
+    private var duration: EditText? = null
     private var sendButton: Button? = null
     private var okHttpClient: OkHttpClient? = null
     private var myServerResponse: String? = null
@@ -27,6 +31,21 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
     //private var dropdown: Spinner? = null
     private val mapper = jacksonObjectMapper()
+
+    fun validDate(strDate: String): Boolean {
+        val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+        format.isLenient = false
+        return try {
+            format.parse(strDate)
+            true
+        } catch (e: ParseException) {
+            println(
+                "Date " + strDate + " is not valid according to " +
+                        format.toPattern() + " pattern."
+            )
+            false
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +70,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         dateReservation = findViewById(R.id.date_reservation)
         timeReservation = findViewById(R.id.time_reservation)
         studentsNumber = findViewById(R.id.students_number)
+        duration = findViewById(R.id.duration)
 
         reservationLaterMessage = findViewById(R.id.reservation_later_message)
         sendButton = findViewById(R.id.send_reservation)
@@ -62,6 +82,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         var localDateReservation: EditText? = null
         var localTimeReservation: EditText? = null
         var localStudentsNumber: EditText? = null
+        var localDuration: EditText? = null
         var stringServer: String? = null
 
         localButton?.setOnClickListener {
@@ -69,10 +90,22 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             localDateReservation = dateReservation
             localTimeReservation = timeReservation
             localStudentsNumber = studentsNumber
+            localDuration = duration
+
+            val isValidDate: Boolean = validDate(localDateReservation?.text.toString())
+            if (!isValidDate) {
+                val localViewDateTime = reservationLaterMessage
+                stringServer = "error"
+                val stringTemp2 = "Your reservation details are not correct. Please TRY AGAIN!!"
+                localViewDateTime?.text = stringTemp2
+                reservationLaterMessage = localViewDateTime
+                return@setOnClickListener
+            }
+
             val reservationBasicDetails = ReservationBasicDetails(
                 localUserName?.text.toString(),
                 localDateReservation?.text.toString(), localTimeReservation?.text.toString(),
-                localStudentsNumber?.text.toString()
+                localDuration?.text.toString(), localStudentsNumber?.text.toString()
             )
             val reservationBasicDetailsJson = mapper.writeValueAsString(reservationBasicDetails)
 
@@ -80,7 +113,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             // we add the information we want to send in a form. each string we want to send should have a name. in our case we sent the dummyText with a name 'sample'
             val formBody: RequestBody = FormBody.Builder().add("reservationBasicDetails", text).build()
             // while building request we give our form as a parameter to post()
-            val url = serverURL + serverReservationFirstStep
+            val s = SimpleDataClasses()
+            val url = s.serverURL + s.serverReservationFirstStep
             val request: Request = Request.Builder().url(url).post(formBody).build()
             thisReservationActivity = this
             okHttpClient!!.newCall(request).enqueue(object : Callback {
@@ -94,14 +128,14 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                         stringServer = response.body!!.string()
                         //Toast.makeText(applicationContext, stringServer, Toast.LENGTH_SHORT).show()
                         val localViewDateTime = reservationLaterMessage
-                        var stringTemp:String? = null
-                        if (stringServer == "reservation_now"){
+                        var stringTemp: String? = null
+                        if (stringServer == "reservation_now") {
                             stringTemp = "data received"
                         }
-                        if (stringServer == "reservation_later"){
+                        if (stringServer == "reservation_later") {
                             stringTemp = "Your reservation will be answered in a later time"
                         }
-                        if (stringServer == "error"){
+                        if (stringServer == "error") {
                             stringTemp = "Your reservation details are not correct. Please TRY AGAIN!!"
                         }
                         localViewDateTime?.text = stringTemp
@@ -119,6 +153,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 i.putExtra("date", localDateReservation?.text.toString())
                 i.putExtra("time", localTimeReservation?.text.toString())
                 i.putExtra("num", localStudentsNumber?.text.toString())
+                i.putExtra("duration", localDuration?.text.toString())
                 startActivity(i)
             }
             if (stringServer == "reservation_later" || stringServer == "error"){
