@@ -32,7 +32,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
     //private var dropdown: Spinner? = null
     private val mapper = jacksonObjectMapper()
 
-    fun validDate(strDate: String): Boolean {
+    private fun validDate(strDate: String): Boolean {
         val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
         format.isLenient = false
         return try {
@@ -41,6 +41,21 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         } catch (e: ParseException) {
             println(
                 "Date " + strDate + " is not valid according to " +
+                        format.toPattern() + " pattern."
+            )
+            false
+        }
+    }
+
+    private fun validTime(strDate: String): Boolean {
+        val format = SimpleDateFormat("hh:mm", Locale.US)
+        format.isLenient = false
+        return try {
+            format.parse(strDate)
+            true
+        } catch (e: ParseException) {
+            println(
+                "Time " + strDate + " is not valid according to " +
                         format.toPattern() + " pattern."
             )
             false
@@ -94,6 +109,16 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
             val isValidDate: Boolean = validDate(localDateReservation?.text.toString())
             if (!isValidDate) {
+                val localViewDateTime = reservationLaterMessage
+                stringServer = "error"
+                val stringTemp2 = "Your reservation details are not correct. Please TRY AGAIN!!"
+                localViewDateTime?.text = stringTemp2
+                reservationLaterMessage = localViewDateTime
+                return@setOnClickListener
+            }
+
+            val isValidTime: Boolean = validTime(localTimeReservation?.text.toString())
+            if (!isValidTime) {
                 val localViewDateTime = reservationLaterMessage
                 stringServer = "error"
                 val stringTemp2 = "Your reservation details are not correct. Please TRY AGAIN!!"

@@ -9,8 +9,8 @@ def choose_flow(parameters):
     print(parameters)
     # example for connection to DB:
     conn = db.connect_db()
-    ans = db.run_query("SELECT * FROM users", conn)
+    ans = db.run_select_query("SELECT * FROM users", conn)
     print(ans)
-    return "reservation_now"
-    # return "reservation_later"
+    # return "reservation_now"
+    return "reservation_later"
     # return "error"
