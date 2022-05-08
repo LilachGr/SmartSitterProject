@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartSitterClient</string>
+    <string name="app_name">SmartSitter</string>
     <string name="button">Button</string>
     <string name="this_is_second_page">This is second page!!!!!!!!!!!</string>
     <string name="send">Send</string>
@@ -13,4 +13,8 @@
     <string name="date_format_d_m_y">Date (DD/MM/YY)</string>
     <string name="next">next</string>
     <string name="for_how_long_should_dby_in_minutes">For how long? (minutes)</string>
+    <string name="login">Login</string>
+    <string name="email_of_university">email of university</string>
+    <string name="password">password</string>
+    <string name="repeat_password">repeat password</string>
 </resources>

@@ -151,14 +151,16 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 override fun onResponse(call: Call, response: Response) {
                     runOnUiThread {
                         stringServer = response.body!!.string()
-                        //Toast.makeText(applicationContext, stringServer, Toast.LENGTH_SHORT).show()
                         val localViewDateTime = reservationLaterMessage
                         var stringTemp: String? = null
-                        if (stringServer == "reservation_now") {
-                            stringTemp = "data received"
+                        if (stringServer == "time_available") {
+                            stringTemp = "Data received!"
                         }
-                        if (stringServer == "reservation_later") {
-                            stringTemp = "Your reservation will be answered in a later time"
+                        if (stringServer == "time_not_available") {
+                            stringTemp = "Your chosen time is full, please choose another time."
+                        }
+                        if (stringServer == "user_has_this_date") {
+                            stringTemp = "Your already booker in this date, please choose another date."
                         }
                         if (stringServer == "error") {
                             stringTemp = "Your reservation details are not correct. Please TRY AGAIN!!"
@@ -173,16 +175,13 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
         val localNextButton = nextButton
         localNextButton?.setOnClickListener {
-            if (stringServer == "reservation_now"){
+            if (stringServer == "time_available"){
                 val i = Intent(this, ReservationLayoutLab::class.java)
                 i.putExtra("date", localDateReservation?.text.toString())
                 i.putExtra("time", localTimeReservation?.text.toString())
                 i.putExtra("num", localStudentsNumber?.text.toString())
                 i.putExtra("duration", localDuration?.text.toString())
                 startActivity(i)
-            }
-            if (stringServer == "reservation_later" || stringServer == "error"){
-                startActivity(Intent(this, MainActivity::class.java))
             }
         }
         nextButton = localNextButton
