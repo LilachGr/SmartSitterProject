@@ -1,5 +1,7 @@
+from datetime import datetime, date
+
 import dataBaseFunctions as db
-from utilitiesFunctions import get_elements_for_request
+from utilitiesFunctions import get_elements_for_request, get_all_available_chairs
 
 """
     this function decide if the reservation is now or decided by algorithm.
@@ -20,13 +22,27 @@ def choose_flow(parameters):
 """
     this function check if their is place available in the requested time.
     return "time_not_available" if not available, return "time_available" if available, 
-    return "user_has_this_date" if the user already booked in this date, other reasons return "error".
+    return "user_has_this_date" if the user already booked in this date,
+    return "smaller_date_time" if the chosen date and time are smaller then the current date.
 """
 def check_time_availability(parameters):
-    user, date, start_time, duration, end_time, number = get_elements_for_request(parameters)
-    query_date = f"select * from reservations where reservation_date = '{date}' and user_id = CONVERT(int, '{user}')"
+    user, date_reservation, start_time, duration, end_time, number = get_elements_for_request(parameters)
+    # check 1
+    query_date = f"select * from reservations where reservation_date = '{date_reservation}' " \
+                 f"and user_id = CONVERT(int, '{user}')"
     ans_date = db.run_select_query(query_date, db.connect_db())
     if len(ans_date) != 0:
         return "user_has_this_date"
-    query_time = f""
-    ans_time = db.run_select_query(query_time, db.connect_db())
+    # check 2
+    today = datetime.now()
+    start_date_time = datetime.strptime(f'{date} {start_time}', '%d/%m/%Y %H:%M')
+    if start_date_time < today:
+        return "smaller_date_time."
+    # check 3
+    query_num_of_labs = f"select count(*) from labs"
+    ans_num_of_labs = db.run_select_query(query_num_of_labs, db.connect_db())
+    ans_available_chairs = get_all_available_chairs(date_reservation, start_time, end_time)
+    if len(ans_available_chairs) >= ans_num_of_labs:
+        return "time_not_available"
+    return "time_available"
+

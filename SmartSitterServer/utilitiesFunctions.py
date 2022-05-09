@@ -63,3 +63,19 @@ def get_location_id(building, room, chair_id):
     location_id = ans[0][0]
     print("location_id: " + str(location_id))
     return location_id
+
+
+"""
+    parameters: date, start_time, end_time
+    return all available places in the labs (building, room, chair).
+"""
+def get_all_available_chairs(date, start_time, end_time):
+    query_time = f"select * from reservations where reservation_date='{date}' " \
+                 f"and (start_time between CONVERT(time , '{start_time}', 8) and CONVERT(time , '{end_time}', 8)) " \
+                 f"and (CONVERT(time,DATEADD(MINUTE, 30, start_time),8) between CONVERT(time , '{start_time}', 8) " \
+                 f"and CONVERT(time , '{end_time}', 8)) " \
+                 f"and (CONVERT(time,DATEADD(MINUTE, 60, start_time),8) between CONVERT(time , '{start_time}', 8) " \
+                 f"and CONVERT(time , '{end_time}', 8)) " \
+                 f"and (CONVERT(time,DATEADD(MINUTE, 90, start_time),8) between CONVERT(time , '{start_time}', 8) " \
+                 f"and CONVERT(time , '{end_time}', 8))"
+    return db.run_select_query(query_time, db.connect_db())
