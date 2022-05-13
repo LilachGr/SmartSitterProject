@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 import algorithms as a
+from utilitiesFunctions import get_elements_for_sign_in
 
 app = Flask(__name__)
 
@@ -14,6 +15,14 @@ def show_home_page():
 def reservation_func():
     text = request.form["reservationBasicDetails"]
     ans = a.check_time_availability(text)
+    return ans
+
+
+@app.route("/signIn", methods=["POST"])
+def sign_in_func():
+    text = request.form["signInDetails"]
+    user, psw = get_elements_for_sign_in(text)
+    ans = a.check_sign_in(user, psw)
     return ans
 
 

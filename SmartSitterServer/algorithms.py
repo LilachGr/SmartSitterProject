@@ -47,3 +47,15 @@ def check_time_availability(parameters):
         return "time_not_available"
     return "time_available"
 
+
+"""
+    this function check if the user is valid user with the correct password.
+    return "error" or user_id
+"""
+def check_sign_in(user, psw):
+    query = f"select * from users where user_name ='{user}' and pwd ='{psw}'"
+    ans = db.run_select_query(query, db.connect_db())
+    if len(ans) != 1:
+        return "error"
+    user_id = ans[0][3]
+    return str(user_id)

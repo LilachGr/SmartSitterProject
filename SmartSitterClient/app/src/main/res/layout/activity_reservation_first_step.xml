@@ -49,7 +49,7 @@
              android:layout_marginTop="372dp" app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintHorizontal_bias="0.682" app:layout_constraintEnd_toEndOf="parent"
              android:layout_marginBottom="29dp" app:layout_constraintBottom_toTopOf="@+id/send_reservation"
-             app:layout_constraintVertical_bias="0.0"/>-->
+             app:layout_constraintVertical_bias="0.0"/>
 
     <EditText
             android:id="@+id/user_name"
@@ -62,7 +62,7 @@
             android:layout_marginTop="86dp" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.502" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="23dp" app:layout_constraintBottom_toTopOf="@+id/date_reservation"
-            app:layout_constraintVertical_bias="0.68"/>
+            app:layout_constraintVertical_bias="0.68"/>-->
     <EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"

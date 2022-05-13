@@ -54,7 +54,7 @@ class SignIn : AppCompatActivity() {
 
             val text = signInDetailsJson.toString()
             // we add the information we want to send in a form. each string we want to send should have a name. in our case we sent the dummyText with a name 'sample'
-            val formBody: RequestBody = FormBody.Builder().add("loginSignInDetails", text).build()
+            val formBody: RequestBody = FormBody.Builder().add("signInDetails", text).build()
             // while building request we give our form as a parameter to post()
             val s = SimpleDataClasses()
             val url = s.serverURL + s.serverSignInForm
@@ -71,6 +71,8 @@ class SignIn : AppCompatActivity() {
                         var stringTemp: String? = null
                         if (localErrorOrId == "error") {
                             stringTemp = "Your sign in details are not correct. Please TRY AGAIN!!"
+                        } else {
+                            stringTemp = "Welcome " + localUserName?.text.toString()
                         }
                         localMessage?.text = stringTemp
                         message = localMessage

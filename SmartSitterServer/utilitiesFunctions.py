@@ -2,6 +2,20 @@ import json
 import datetime as d
 from dataBaseFunctions import run_insert_query, connect_db, run_select_query
 
+
+"""
+    this function returns all the elements for sign in, when every element is a string.
+    text - string that contain JSON, must be for sign in.
+    return - return the following elements in this order: user_name, password
+"""
+def get_elements_for_sign_in(text):
+    json_object = json.loads(text)
+    user = json_object["userNameStudent"]
+    psw = json_object["passwordStudent"]
+    print(f"sign in: {user},{psw}")
+    return user, psw
+
+
 """
     this function returns all the elements for reservation request, when every element is a string.
     text - string that contain JSON, must be for reservation request.
@@ -18,7 +32,7 @@ def get_elements_for_request(text):
     start_time = str(start_time.time())
     end_time = str(end_time.time())
     number = json_object["numberOfStudent"]
-    print(user, date, start_time, duration, end_time, number)
+    print(f"reservation date time: {user}, {date}, {start_time}, {duration}, {end_time}, {number}")
     return user, date, start_time, duration, end_time, number
 
 
@@ -35,7 +49,7 @@ def get_elements_for_reservation(text):
     building = json_object["building"]
     room = json_object["room"]
     chair_id = json_object["chairId"]
-    print(building, room, chair_id)
+    print(f"reservation full details: {user}, {date}, {start_time}, {duration}, {end_time}, {number}, {building}, {room}, {chair_id}")
     return user, date, start_time, duration, end_time, number, building, room, chair_id
 
 

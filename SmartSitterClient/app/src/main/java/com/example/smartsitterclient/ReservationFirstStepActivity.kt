@@ -17,8 +17,8 @@ import java.util.*
 import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
 
 class ReservationFirstStepActivity : AppCompatActivity() {
-    private var userName: EditText? = null
-    //private var userName: String = ""
+    //private var userName: EditText? = null
+    private var userName: String = ""
     private var dateReservation: EditText? = null
     private var timeReservation: EditText? = null
     private var duration: EditText? = null
@@ -81,7 +81,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_reservation_first_step)
 
-        userName = findViewById(R.id.user_name)
+        //userName = findViewById(R.id.user_name)
         dateReservation = findViewById(R.id.date_reservation)
         timeReservation = findViewById(R.id.time_reservation)
         duration = findViewById(R.id.duration)
@@ -105,10 +105,10 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             idUserName = extras.getString("idUserName").toString()
         }
 
-        //userName = idUserName
+        userName = idUserName
 
         localButton?.setOnClickListener {
-            localUserName = userName
+            //localUserName = userName
             localDateReservation = dateReservation
             localTimeReservation = timeReservation
             localDuration = duration
@@ -134,8 +134,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             }
 
             val reservationBasicDetails = ReservationBasicDetails(
-                localUserName?.text.toString(),
-                //userName,
+                //localUserName?.text.toString(),
+                userName,
                 localDateReservation?.text.toString(), localTimeReservation?.text.toString(),
                 localDuration?.text.toString(), "1"
             )
@@ -184,6 +184,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         localNextButton?.setOnClickListener {
             if (stringServer == "time_available"){
                 val i = Intent(this, ReservationLayoutLab::class.java)
+                i.putExtra("idUserName", userName)
                 i.putExtra("date", localDateReservation?.text.toString())
                 i.putExtra("time", localTimeReservation?.text.toString())
                 i.putExtra("duration", localDuration?.text.toString())

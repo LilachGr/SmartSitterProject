@@ -27,6 +27,7 @@ class ReservationLayoutLab : AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             val localViewDateTime = viewDateTime
+            val userName = extras.getString("idUserName")
             val time = extras.getString("time")
             var date = extras.getString("date")
             val duration = extras.getString("duration")
