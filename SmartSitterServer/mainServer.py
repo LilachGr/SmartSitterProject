@@ -29,3 +29,9 @@ if __name__ == "__main__":
                 f" num_of_participants) VALUES ('{user}', CONVERT(datetime, '{date}',103), CONVERT(time," \
                 f" '{start_time}'), CONVERT(time, '{end_time}'), CONVERT(int, '{duration}'), CONVERT(int, '{number}'))"
         db.run_insert_query(query, db.connect_db())"""
+
+
+    """    val serverLoginForm = "login"
+    val serverSignInForm = "signIn"
+    val serverAllReservation = "allReservation"""
+

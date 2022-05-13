@@ -28,21 +28,22 @@ def choose_flow(parameters):
 def check_time_availability(parameters):
     user, date_reservation, start_time, duration, end_time, number = get_elements_for_request(parameters)
     # check 1
-    query_date = f"select * from reservations where reservation_date = '{date_reservation}' " \
+    query_date = f"select * from reservations where reservation_date = CONVERT(date, '{date_reservation}',3) " \
                  f"and user_id = CONVERT(int, '{user}')"
     ans_date = db.run_select_query(query_date, db.connect_db())
     if len(ans_date) != 0:
         return "user_has_this_date"
     # check 2
     today = datetime.now()
-    start_date_time = datetime.strptime(f'{date} {start_time}', '%d/%m/%Y %H:%M')
+    d = date_reservation.split('/')
+    start_date_time = datetime.strptime(f"{d[0] + '/' + d[1] + '/' + '20' + d[2]}", "%d/%m/%Y")
     if start_date_time < today:
-        return "smaller_date_time."
+        return "smaller_date_time"
     # check 3
     query_num_of_labs = f"select count(*) from labs"
     ans_num_of_labs = db.run_select_query(query_num_of_labs, db.connect_db())
     ans_available_chairs = get_all_available_chairs(date_reservation, start_time, end_time)
-    if len(ans_available_chairs) >= ans_num_of_labs:
+    if len(ans_available_chairs) >= ans_num_of_labs[0][0]:
         return "time_not_available"
     return "time_available"
 

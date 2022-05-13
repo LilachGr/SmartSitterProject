@@ -18,9 +18,9 @@ import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
 
 class ReservationFirstStepActivity : AppCompatActivity() {
     private var userName: EditText? = null
+    //private var userName: String = ""
     private var dateReservation: EditText? = null
     private var timeReservation: EditText? = null
-    private var studentsNumber: EditText? = null
     private var duration: EditText? = null
     private var sendButton: Button? = null
     private var okHttpClient: OkHttpClient? = null
@@ -48,7 +48,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
     }
 
     private fun validTime(strDate: String): Boolean {
-        val format = SimpleDateFormat("hh:mm", Locale.US)
+        val format = SimpleDateFormat("HH:mm",Locale.getDefault())
         format.isLenient = false
         return try {
             format.parse(strDate)
@@ -84,7 +84,6 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         userName = findViewById(R.id.user_name)
         dateReservation = findViewById(R.id.date_reservation)
         timeReservation = findViewById(R.id.time_reservation)
-        studentsNumber = findViewById(R.id.students_number)
         duration = findViewById(R.id.duration)
 
         reservationLaterMessage = findViewById(R.id.reservation_later_message)
@@ -96,15 +95,22 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         var localUserName: EditText? = null
         var localDateReservation: EditText? = null
         var localTimeReservation: EditText? = null
-        var localStudentsNumber: EditText? = null
         var localDuration: EditText? = null
         var stringServer: String? = null
+
+        var idUserName: String = ""
+
+        val extras = intent.extras
+        if (extras != null) {
+            idUserName = extras.getString("idUserName").toString()
+        }
+
+        //userName = idUserName
 
         localButton?.setOnClickListener {
             localUserName = userName
             localDateReservation = dateReservation
             localTimeReservation = timeReservation
-            localStudentsNumber = studentsNumber
             localDuration = duration
 
             val isValidDate: Boolean = validDate(localDateReservation?.text.toString())
@@ -129,8 +135,9 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
             val reservationBasicDetails = ReservationBasicDetails(
                 localUserName?.text.toString(),
+                //userName,
                 localDateReservation?.text.toString(), localTimeReservation?.text.toString(),
-                localDuration?.text.toString(), localStudentsNumber?.text.toString()
+                localDuration?.text.toString(), "1"
             )
             val reservationBasicDetailsJson = mapper.writeValueAsString(reservationBasicDetails)
 
@@ -154,15 +161,15 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                         val localViewDateTime = reservationLaterMessage
                         var stringTemp: String? = null
                         if (stringServer == "time_available") {
-                            stringTemp = "Data received!"
+                            stringTemp = "Data received!!"
                         }
                         if (stringServer == "time_not_available") {
-                            stringTemp = "Your chosen time is full, please choose another time."
+                            stringTemp = "Your chosen time is full, please choose another time!!"
                         }
                         if (stringServer == "user_has_this_date") {
-                            stringTemp = "Your already booker in this date, please choose another date."
+                            stringTemp = "Your already booked in this date, please choose another date!!"
                         }
-                        if (stringServer == "error") {
+                        if (stringServer == "smaller_date_time") {
                             stringTemp = "Your reservation details are not correct. Please TRY AGAIN!!"
                         }
                         localViewDateTime?.text = stringTemp
@@ -179,7 +186,6 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 val i = Intent(this, ReservationLayoutLab::class.java)
                 i.putExtra("date", localDateReservation?.text.toString())
                 i.putExtra("time", localTimeReservation?.text.toString())
-                i.putExtra("num", localStudentsNumber?.text.toString())
                 i.putExtra("duration", localDuration?.text.toString())
                 startActivity(i)
             }

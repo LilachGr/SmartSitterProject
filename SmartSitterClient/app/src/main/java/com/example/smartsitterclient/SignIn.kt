@@ -11,88 +11,53 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.*
 //import sun.jvm.hotspot.utilities.IntArray
 import java.io.IOException
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class SignIn : AppCompatActivity() {
     private var userName: EditText? = null
     private var password: EditText? = null
-    private var repeatPassword: EditText? = null
-    private var emailUniversity: EditText? = null
     private var sendButton: Button? = null
-    private var okHttpClient: OkHttpClient? = null
-    private var loginMessage: TextView? = null
+    private var loginButton: Button? = null
+    private var message: TextView? = null
     private var nextButton: Button? = null
+    private var okHttpClient: OkHttpClient? = null
 
     private val mapper = jacksonObjectMapper()
 
-    private fun validEmailUniversity(strEmail: String): Boolean {
-        return true
-    }
-
-    private fun validPassword(strPsw: String,strRepeatPsw: String): Boolean {
-        return true
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_page)
+        setContentView(R.layout.activity_sign_in)
 
         userName = findViewById(R.id.user_name)
         password = findViewById(R.id.password)
-        repeatPassword = findViewById(R.id.repeat_password)
-        emailUniversity = findViewById(R.id.email)
-        loginMessage = findViewById(R.id.login_message)
-        sendButton = findViewById(R.id.send_login)
+        sendButton = findViewById(R.id.send_sign_in)
         nextButton = findViewById(R.id.next_button)
+        loginButton = findViewById(R.id.login_button)
+        message = findViewById(R.id.sign_in_message)
         okHttpClient = OkHttpClient()
 
-        val localButton = sendButton
+        val localSendButton = sendButton
         var localUserName: EditText? = null
         var localPassword: EditText? = null
-        var localRepeatPassword: EditText? = null
-        var localEmailUniversity: EditText? = null
-        var localError: String? = null
-        val message = loginMessage
+        val localMessage = message
+        var localErrorOrId: String? = null
 
-        localButton?.setOnClickListener {
+        localSendButton?.setOnClickListener {
             localUserName = userName
             localPassword = password
-            localRepeatPassword = repeatPassword
-            localEmailUniversity = emailUniversity
 
-            val isValidEmail: Boolean = validEmailUniversity(localEmailUniversity?.text.toString())
-            if (!isValidEmail) {
-                localError = "error"
-                val stringTemp2 = "Your email is not accurate university email. Please TRY AGAIN!!"
-                message?.text = stringTemp2
-                loginMessage = message
-                return@setOnClickListener
-            }
-
-            val isValidPassword: Boolean = validPassword(localPassword?.text.toString(), localRepeatPassword?.text.toString())
-            if (!isValidPassword) {
-                localError = "error"
-                val stringTemp2 = "Your password is not valid password. Please TRY AGAIN!!"
-                message?.text = stringTemp2
-                loginMessage = message
-                return@setOnClickListener
-            }
-
-            val loginDetails = LoginDetails(
+            val signInDetails = SignInDetails(
                 localUserName?.text.toString(),
-                localPassword?.text.toString(), localEmailUniversity?.text.toString()
+                localPassword?.text.toString()
             )
-            val loginDetailsJson = mapper.writeValueAsString(loginDetails)
+            val signInDetailsJson = mapper.writeValueAsString(signInDetails)
 
-            val text = loginDetailsJson.toString()
+            val text = signInDetailsJson.toString()
             // we add the information we want to send in a form. each string we want to send should have a name. in our case we sent the dummyText with a name 'sample'
-            val formBody: RequestBody = FormBody.Builder().add("loginDetails", text).build()
+            val formBody: RequestBody = FormBody.Builder().add("loginSignInDetails", text).build()
             // while building request we give our form as a parameter to post()
             val s = SimpleDataClasses()
-            val url = s.serverURL + s.serverLoginForm
+            val url = s.serverURL + s.serverSignInForm
             val request: Request = Request.Builder().url(url).post(formBody).build()
             okHttpClient!!.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -102,26 +67,33 @@ class SignIn : AppCompatActivity() {
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
                     runOnUiThread {
-                        localError = response.body!!.string()
-                        val localLoginMessage = loginMessage
+                        localErrorOrId = response.body!!.string()
                         var stringTemp: String? = null
-                        if (localError == "error") {
-                            stringTemp = "Your login details are not correct. Please TRY AGAIN!!"
+                        if (localErrorOrId == "error") {
+                            stringTemp = "Your sign in details are not correct. Please TRY AGAIN!!"
                         }
-                        localLoginMessage?.text = stringTemp
-                        loginMessage = localLoginMessage
+                        localMessage?.text = stringTemp
+                        message = localMessage
                     }
                 }
             })
         }
-        sendButton = localButton
+        sendButton = localSendButton
 
         val localNextButton = nextButton
         localNextButton?.setOnClickListener {
-            if (localError != "error") {
-                startActivity(Intent(this, SignIn::class.java))
+            if (localErrorOrId != "error") {
+                val i = Intent(this, ReservationFirstStepActivity::class.java)
+                i.putExtra("idUserName", localErrorOrId)
+                startActivity(i)
             }
         }
         nextButton = localNextButton
+
+        val localLoginButton = loginButton
+        localLoginButton?.setOnClickListener {
+            startActivity(Intent(this, LoginPage::class.java))
+        }
+        loginButton = localLoginButton
     }
 }

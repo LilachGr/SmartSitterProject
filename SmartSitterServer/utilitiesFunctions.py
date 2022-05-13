@@ -1,6 +1,5 @@
 import json
 import datetime as d
-
 from dataBaseFunctions import run_insert_query, connect_db, run_select_query
 
 """
@@ -47,7 +46,7 @@ def insert_to_reservation_table(parameters):
     user, date, start_time, duration, end_time, number, building, room, chair_id = \
         get_elements_for_reservation(parameters)
     query = f"INSERT INTO reservations (reservation_date, start_time, end_time, duration, num_of_participants, " \
-            f"user_id, location_id) VALUES(CONVERT(datetime, '{date}',103), CONVERT(time, '{start_time}')," \
+            f"user_id, location_id) VALUES(CONVERT(datetime, '{date}',3), CONVERT(time, '{start_time}')," \
             f"CONVERT(time, '{end_time}'), CONVERT(int, '{duration}'),  CONVERT(int, '{number}')," \
             f"CONVERT(int, '{user}'), {get_location_id(building, room, chair_id)})"
     run_insert_query(query, connect_db())
@@ -66,16 +65,16 @@ def get_location_id(building, room, chair_id):
 
 
 """
-    parameters: date, start_time, end_time
+    parameters: date, start_time, end_time - all string
     return all available places in the labs (building, room, chair).
 """
 def get_all_available_chairs(date, start_time, end_time):
-    query_time = f"select * from reservations where reservation_date='{date}' " \
-                 f"and (start_time between CONVERT(time , '{start_time}', 8) and CONVERT(time , '{end_time}', 8)) " \
-                 f"and (CONVERT(time,DATEADD(MINUTE, 30, start_time),8) between CONVERT(time , '{start_time}', 8) " \
+    query_time = f"select * from reservations where reservation_date=CONVERT(date, '{date}',3) " \
+                 f"and ((start_time between CONVERT(time , '{start_time}', 8) and CONVERT(time , '{end_time}', 8)) " \
+                 f"or (CONVERT(time,DATEADD(MINUTE, 30, start_time),8) between CONVERT(time , '{start_time}', 8) " \
                  f"and CONVERT(time , '{end_time}', 8)) " \
-                 f"and (CONVERT(time,DATEADD(MINUTE, 60, start_time),8) between CONVERT(time , '{start_time}', 8) " \
+                 f"or (CONVERT(time,DATEADD(MINUTE, 60, start_time),8) between CONVERT(time , '{start_time}', 8) " \
                  f"and CONVERT(time , '{end_time}', 8)) " \
-                 f"and (CONVERT(time,DATEADD(MINUTE, 90, start_time),8) between CONVERT(time , '{start_time}', 8) " \
-                 f"and CONVERT(time , '{end_time}', 8))"
-    return db.run_select_query(query_time, db.connect_db())
+                 f"or (CONVERT(time,DATEADD(MINUTE, 90, start_time),8) between CONVERT(time , '{start_time}', 8) " \
+                 f"and CONVERT(time , '{end_time}', 8)))"
+    return run_select_query(query_time, connect_db())

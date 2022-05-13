@@ -12,9 +12,12 @@
     <string name="time_format_h_m">Time (HH:MM)</string>
     <string name="date_format_d_m_y">Date (DD/MM/YY)</string>
     <string name="next">next</string>
-    <string name="for_how_long_should_dby_in_minutes">For how long? (minutes)</string>
+    <string name="for_how_long_should_dby_in_minutes">For how long? (30,60,90,120 minutes)</string>
     <string name="login">Login</string>
     <string name="email_of_university">email of university</string>
     <string name="password">password</string>
     <string name="repeat_password">repeat password</string>
+    <string name="title_reservation_first_step">Choose your reservation date and time</string>
+    <string name="sign_in">Sign in</string>
+    <string name="registration_to_the_app">Registration to the app</string>
 </resources>
