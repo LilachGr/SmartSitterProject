@@ -106,7 +106,9 @@ class LoginPage : AppCompatActivity() {
                         val localLoginMessage = loginMessage
                         var stringTemp: String? = null
                         if (localError == "error") {
-                            stringTemp = "Your login details are not correct. Please TRY AGAIN!!"
+                            stringTemp = "Your registration details are not correct. Please TRY AGAIN!!"
+                        } else{
+                            stringTemp = "Data received!!"
                         }
                         localLoginMessage?.text = stringTemp
                         loginMessage = localLoginMessage

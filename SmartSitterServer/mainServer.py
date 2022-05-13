@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 import algorithms as a
-from utilitiesFunctions import get_elements_for_sign_in
+from utilitiesFuncJSON import get_elements_for_sign_in, get_elements_for_login
 
 app = Flask(__name__)
 
@@ -23,6 +23,13 @@ def sign_in_func():
     text = request.form["signInDetails"]
     user, psw = get_elements_for_sign_in(text)
     ans = a.check_sign_in(user, psw)
+    return ans
+
+
+@app.route("/login", methods=["POST"])
+def login_func():
+    text = request.form["loginDetails"]
+    ans = a.handle_login(text)
     return ans
 
 

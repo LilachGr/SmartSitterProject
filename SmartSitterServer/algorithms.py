@@ -1,7 +1,7 @@
-from datetime import datetime, date
-
+from datetime import datetime
 import dataBaseFunctions as db
-from utilitiesFunctions import get_elements_for_request, get_all_available_chairs
+from utilitiesFuncDB import get_all_available_chairs, insert_to_login_table
+from utilitiesFuncJSON import get_elements_for_request, get_elements_for_login
 
 """
     this function decide if the reservation is now or decided by algorithm.
@@ -59,3 +59,26 @@ def check_sign_in(user, psw):
         return "error"
     user_id = ans[0][3]
     return str(user_id)
+
+
+"""
+    parameters - string that contain JSON (text from client)
+    this function check if the login details are valid and insert them to the correct table.
+    return "error" or "true"
+"""
+def handle_login(parameters):
+    user, psw, email = get_elements_for_login(parameters)
+    # checks:
+    query_user_exist = f"select * from users where user_name ='{user}'"
+    ans_user_exist = db.run_select_query(query_user_exist, db.connect_db())
+    if len(ans_user_exist) != 0:
+        return "error"
+    query_email_exist = f"select * from users where email ='{email}'"
+    ans_email_exist = db.run_select_query(query_email_exist, db.connect_db())
+    if len(ans_email_exist) != 0:
+        return "error"
+    if user == '' or psw == '' or email == '':
+        return "error"
+    # insert to table:
+    insert_to_login_table(user, psw, email)
+    return "true"
