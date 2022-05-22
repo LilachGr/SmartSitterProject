@@ -48,3 +48,18 @@ def get_all_available_chairs(date, start_time, end_time):
 def insert_to_login_table(user, psw, email):
     query = f"INSERT INTO users (user_name, email, pwd) VALUES('{user}', '{email}', '{psw}')"
     run_insert_query(query, connect_db())
+
+
+"""
+    insert all room to table labs. notice the chair_id is unique to the room.
+    this action should be done once for lab.
+    this is a private function, and shouldn't be used outside this file.
+"""
+def __insert_to_lab(building, room, start_id, end_id, silence_room):
+    for chair_id in range(start_id, end_id):
+        query = f"INSERT INTO labs (building, room, chairId, silence_room) VALUES('{building}', '{room}', '{chair_id}'" \
+                f", '{silence_room}')"
+        run_insert_query(query, connect_db())
+
+
+#__insert_to_lab(604, 202, 1, 13*3+1, 'true')
