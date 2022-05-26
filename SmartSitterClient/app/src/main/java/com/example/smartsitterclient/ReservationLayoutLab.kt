@@ -4,37 +4,62 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 
 class ReservationLayoutLab : AppCompatActivity() {
-//    private var userName: EditText? = null
-//    //private var dateReservation: EditText? = null
-//    private var timeReservation: EditText? = null
-//    private var studentsNumber: EditText? = null
-//    private var sendButton: Button? = null
-//    private var okHttpClient: OkHttpClient? = null
-//    private val mapper = jacksonObjectMapper()
     private var buttonClick22: Button? = null
-    private var viewDateTime: TextView? = null
+    private var viewPreviousData: TextView? = null
+    private var viewChosenChairId: TextView? = null
+
+    private var chairIdButton1: Button? = null
+
+    private fun functionPerChair(chairId: String, localViewChosenChairId: TextView) {
+        Toast.makeText(this, "click1", Toast.LENGTH_SHORT).show()
+        val temp = "chosen chair: $chairId"
+        localViewChosenChairId.text = temp
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_layout_lab)
 
-        viewDateTime = findViewById(R.id.dateTime)
+        viewPreviousData = findViewById(R.id.previous_data)
+        viewChosenChairId = findViewById(R.id.chosen_chair_id)
 
         val extras = intent.extras
         if (extras != null) {
-            val localViewDateTime = viewDateTime
+            val localPreviousData = viewPreviousData
             val userName = extras.getString("idUserName")
             val time = extras.getString("time")
             var date = extras.getString("date")
             val duration = extras.getString("duration")
             date = date.toString()
             val tempText = "Date: $date, Time: $time, Duration: $duration"
-            localViewDateTime?.text = tempText
-            viewDateTime = localViewDateTime
+            localPreviousData?.text = tempText
+            viewPreviousData = localPreviousData
+        }
+
+        val localViewChosenChairId = viewChosenChairId
+
+        //define all the chairs:
+        chairIdButton1 = findViewById(R.id.chair_id_1)
+        val localChairIdButton1 = chairIdButton1
+        localChairIdButton1?.setOnClickListener {
+            if (localViewChosenChairId != null) {
+                functionPerChair("1", localViewChosenChairId)
+                chairIdButton1?.isSelected = true
+            }
+        }
+        chairIdButton1 = localChairIdButton1
+        //finish to define all the chairs
+
+        viewChosenChairId = localViewChosenChairId
+
+        val isEnabled = false
+        if (isEnabled){
+            chairIdButton1?.isEnabled = false
         }
 
         buttonClick22 = findViewById(R.id.send_location)

@@ -2,6 +2,7 @@ package com.example.smartsitterclient
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -11,9 +12,6 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.*
 //import sun.jvm.hotspot.utilities.IntArray
 import java.io.IOException
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class LoginPage : AppCompatActivity() {
@@ -29,11 +27,21 @@ class LoginPage : AppCompatActivity() {
     private val mapper = jacksonObjectMapper()
 
     private fun validEmailUniversity(strEmail: String): Boolean {
-        return true
+        val isValidEmail =  Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()
+        if (isValidEmail) {
+            val list = strEmail.split('@')
+            if (list[1] == "biu.ac.il"){ //check if the ending is correct
+                return true
+            }
+        }
+        return false
     }
 
-    private fun validPassword(strPsw: String,strRepeatPsw: String): Boolean {
-        return true
+    private fun validPassword(strPsw: String, strRepeatPsw: String): Boolean {
+        if (strPsw == strRepeatPsw) {
+            return true
+        }
+        return false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

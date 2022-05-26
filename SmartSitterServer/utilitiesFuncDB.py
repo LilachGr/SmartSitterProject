@@ -28,9 +28,9 @@ def get_location_id(building, room, chair_id):
 
 """
     parameters: date, start_time, end_time - all string
-    return all available places in the labs (building, room, chair).
+    return all unavailable places in the labs (building, room, chair).
 """
-def get_all_available_chairs(date, start_time, end_time):
+def get_all_unavailable_chairs(date, start_time, end_time):
     query_time = f"select * from reservations where reservation_date=CONVERT(date, '{date}',3) " \
                  f"and ((start_time between CONVERT(time , '{start_time}', 8) and CONVERT(time , '{end_time}', 8)) " \
                  f"or (CONVERT(time,DATEADD(MINUTE, 30, start_time),8) between CONVERT(time , '{start_time}', 8) " \

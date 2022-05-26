@@ -1,22 +1,8 @@
 from datetime import datetime
 import dataBaseFunctions as db
-from utilitiesFuncDB import get_all_available_chairs, insert_to_login_table
-from utilitiesFuncJSON import get_elements_for_request, get_elements_for_login
-
-"""
-    this function decide if the reservation is now or decided by algorithm.
-    parameters - string that contain JSON (text from client)
-    return - "reservation_now" or "reservation_later" or "error" (must be one of this options)
-"""
-def choose_flow(parameters):
-    print(parameters)
-    # example for connection to DB:
-    conn = db.connect_db()
-    ans = db.run_select_query("SELECT * FROM users", conn)
-    print(ans)
-    return "reservation_now"
-    # return "reservation_later"
-    # return "error"
+from utilitiesFuncDB import get_all_unavailable_chairs, insert_to_login_table, get_location_id, \
+    insert_to_reservation_table
+from utilitiesFuncJSON import get_elements_for_request, get_elements_for_login, get_elements_for_reservation
 
 
 """
@@ -42,7 +28,7 @@ def check_time_availability(parameters):
     # check 3
     query_num_of_labs = f"select count(*) from labs"
     ans_num_of_labs = db.run_select_query(query_num_of_labs, db.connect_db())
-    ans_available_chairs = get_all_available_chairs(date_reservation, start_time, end_time)
+    ans_available_chairs = get_all_unavailable_chairs(date_reservation, start_time, end_time)
     if len(ans_available_chairs) >= ans_num_of_labs[0][0]:
         return "time_not_available"
     return "time_available"
@@ -82,3 +68,34 @@ def handle_login(parameters):
     # insert to table:
     insert_to_login_table(user, psw, email)
     return "true"
+
+
+""""""
+def check_lab_choice(parameters):
+    user, date, start_time, duration, end_time, number, building, room, chair_id = \
+        get_elements_for_reservation(parameters)
+    # checks:
+    all_available_chairs = get_all_unavailable_chairs(date, start_time, end_time)
+    location_id = get_location_id(building, room, chair_id)
+    if location_id in all_available_chairs:
+        return "error"
+    # insert to table:
+    insert_to_reservation_table(parameters)
+    return "true"
+
+
+"""
+    this function decide if the reservation is now or decided by algorithm.
+    parameters - string that contain JSON (text from client)
+    return - "reservation_now" or "reservation_later" or "error" (must be one of this options)
+
+def choose_flow(parameters):
+    print(parameters)
+    # example for connection to DB:
+    conn = db.connect_db()
+    ans = db.run_select_query("SELECT * FROM users", conn)
+    print(ans)
+    return "reservation_now"
+    # return "reservation_later"
+    # return "error"
+"""
