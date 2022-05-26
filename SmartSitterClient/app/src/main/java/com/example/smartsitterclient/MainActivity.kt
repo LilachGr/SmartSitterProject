@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         buttonClick22 = findViewById(R.id.button1)
         val localButtonClick22 = buttonClick22
         localButtonClick22?.setOnClickListener {
+            //startActivity(Intent(this, SignIn::class.java))
             startActivity(Intent(this, SignIn::class.java))
             //finish() //with this command the previous page closed and can't be reach with the back button (that built in the phone)
         }

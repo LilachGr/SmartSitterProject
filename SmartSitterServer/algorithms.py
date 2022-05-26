@@ -77,8 +77,9 @@ def check_lab_choice(parameters):
     # checks:
     all_available_chairs = get_all_unavailable_chairs(date, start_time, end_time)
     location_id = get_location_id(building, room, chair_id)
-    if location_id in all_available_chairs:
-        return "error"
+    for row in all_available_chairs:
+        if location_id == row[7]:
+            return "error"
     # insert to table:
     insert_to_reservation_table(parameters)
     return "true"

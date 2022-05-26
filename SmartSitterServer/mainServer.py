@@ -11,11 +11,17 @@ def show_home_page():
     return "This is home page"
 
 
-@app.route("/reservation", methods=["POST"])
-def reservation_func():
+@app.route("/timeAvailability", methods=["POST"])
+def time_availability_func():
     text = request.form["reservationBasicDetails"]
     ans = a.check_time_availability(text)
     return ans
+
+
+@app.route("/reservation", methods=["POST"])
+def reservation_func():
+    text = request.form["reservationAllDetails"]
+    return a.check_lab_choice(text)
 
 
 @app.route("/signIn", methods=["POST"])
