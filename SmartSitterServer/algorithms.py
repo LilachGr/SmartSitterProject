@@ -1,7 +1,8 @@
+import json
 from datetime import datetime
 import dataBaseFunctions as db
 from utilitiesFuncDB import get_all_unavailable_chairs, insert_to_login_table, get_location_id, \
-    insert_to_reservation_table
+    insert_to_reservation_table, get_location_details
 from utilitiesFuncJSON import get_elements_for_request, get_elements_for_login, get_elements_for_reservation
 
 
@@ -84,6 +85,23 @@ def check_lab_choice(parameters):
     insert_to_reservation_table(parameters)
     return "true"
 
+
+def get_unavailable_chairs_location(date_reservation, start_time, end_time):
+    ans = get_all_unavailable_chairs(date_reservation, start_time, end_time)
+    list_of_chairs_id = []
+    for row in ans:
+        chair = row[7]
+        list_of_chairs_id.append(chair)
+    location_details = get_location_details(list_of_chairs_id)
+    json_data = []
+    for row in location_details:
+        data = {'building': str(row[0]), 'room': str(row[1]), 'chairId': str(row[2]), 'id': str(row[3])}
+        json_data.append(json.dumps(data))
+    j = json.loads(json.dumps(json_data))
+    return str(j)
+
+# ans = get_unavailable_chairs_location("26/06/22", "21:00", "22:00")
+# print(ans)
 
 """
     this function decide if the reservation is now or decided by algorithm.

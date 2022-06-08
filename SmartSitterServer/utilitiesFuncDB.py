@@ -16,7 +16,7 @@ def insert_to_reservation_table(parameters):
 
 """
     building, room, chair_id - all string
-    return location_is - int
+    return location_id - int
 """
 def get_location_id(building, room, chair_id):
     query = f"select id from labs where building='{building}' and room='{room}' and chairId='{chair_id}'"
@@ -62,4 +62,24 @@ def __insert_to_lab(building, room, start_id, end_id, silence_room):
         run_insert_query(query, connect_db())
 
 
-#__insert_to_lab(604, 202, 1, 13*3+1, 'true')
+"""
+    param - list of chairs id
+    return - location_is - int
+"""
+def get_location_details(list_id):
+    all_ids = "("
+    is_first = True
+    for i in list_id:
+        if not is_first:
+            all_ids += ","
+        all_ids += f"{i}"
+        is_first = False
+    all_ids += ")"
+    query = f"select building, room, chairId, id from labs where id in {all_ids}"
+    ans = run_select_query(query, connect_db())
+    return ans
+
+
+# __insert_to_lab(604, 202, 1, 13*3+1, 'true')
+# ans = get_all_unavailable_chairs("26/06/22", "21:00", "22:00")
+

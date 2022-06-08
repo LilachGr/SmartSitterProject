@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request
 import algorithms as a
-from utilitiesFuncJSON import get_elements_for_sign_in, get_elements_for_login
+import json
+from utilitiesFuncJSON import get_elements_for_sign_in, get_elements_for_login, get_elements_for_request
 
 app = Flask(__name__)
 
@@ -36,6 +37,14 @@ def sign_in_func():
 def login_func():
     text = request.form["loginDetails"]
     ans = a.handle_login(text)
+    return ans
+
+
+@app.route("/getUnavailableChairs", methods=["POST"])
+def get_unavailable_chairs():
+    text = request.form["reservationTimeDate"]
+    user, date_reservation, start_time, duration, end_time, number = get_elements_for_request(text)
+    ans = a.get_unavailable_chairs_location(date_reservation, start_time, end_time)
     return ans
 
 

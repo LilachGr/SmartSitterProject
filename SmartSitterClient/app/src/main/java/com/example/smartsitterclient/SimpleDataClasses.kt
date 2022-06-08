@@ -3,10 +3,12 @@ package com.example.smartsitterclient
 
 class SimpleDataClasses(){
     val serverURL = "http://10.100.102.57:5000/"
+    //val serverURL = "http://192.168.147.98:5000/"
     val serverReservationFirstStep = "timeAvailability"
     val serverLoginForm = "login"
     val serverSignInForm = "signIn"
     val serverAllReservation = "reservation"
+    val serverGetUnavailableChairs = "getUnavailableChairs"
 }
 
 data class ReservationBasicDetails(var userNameStudent: String, var dateReservation: String, var timeReservation: String,
@@ -19,4 +21,7 @@ data class ReservationAllDetails(var userNameStudent: String, var dateReservatio
 data class LoginDetails(var userNameStudent: String, var passwordStudent: String, var emailUniversity: String)
 
 data class SignInDetails(var userNameStudent: String, var passwordStudent: String)
+
+data class UnavailableChairs(var building: String, var room: String, var chairId: String, var id: String)
+
 
