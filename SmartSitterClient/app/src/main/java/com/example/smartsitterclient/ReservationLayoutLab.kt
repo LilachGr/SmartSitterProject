@@ -40,33 +40,42 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         localViewChosenChairId.text = temp
     }
 
-    private fun getUnavailableSeatsFromJson(){
-        val text =
-            "[\'{\"building\": 604, \"room\": 202, \"chairId\": 1, \"id\": 4}\', \'{\"building\": 604, \"room\": 202, \"chairId\": 2, \"id\": 5}\']"
-        val convertedObject: JsonArray = Gson().fromJson(text, JsonArray::class.java)
-        for (row in convertedObject) {
-            //var rowNew = row.toString().drop(1).dropLast(1)
-            var rowNew = row.toString().replace('"','\'').drop(1).dropLast(1)
-            print(rowNew)
-            var x = "{\'building\': 604, \'room\': 202, \'chairId\': 1, \'id\': 4}"
-            var g = "{\"building\": \"604\", \"room\": \"202\", \"chairId\": \"1\", \"id\": \"4\"}"
-            val jsonObject2 = JsonParser().parse(x).asJsonObject
-            val jsonObject22 = JsonParser().parse(g).asJsonObject
-            val jsonObject = JsonParser().parse(rowNew).asJsonObject
-            //val jsonObject1 = Gson().toJson(row, JsonObject::class.java)
-            //val jsonObject = row.asJsonObject
-            val buildingRow = jsonObject["building"].toString()
-            val roomRow = jsonObject["room"].toString()
-            val chairIdRow = jsonObject["chairId"].toString()
-            var idRow = jsonObject["id"].toString()
-            if (buildingRow == building && roomRow == room) {
-                for (b in setChairs) {
-                    if (b.text.toString() == chairIdRow) {
-                        b.isEnabled = false
+    private fun getUnavailableSeatsFromJson(reservationBasicDetails: ReservationBasicDetails){
+        val reservationBasicDetailsJson = mapper.writeValueAsString(reservationBasicDetails)
+
+        val text = reservationBasicDetailsJson.toString()
+        val formBody: RequestBody = FormBody.Builder().add("reservationTimeDate", text).build()
+        val s = SimpleDataClasses()
+        val url = s.serverURL + s.serverGetUnavailableChairs
+        val request: Request = Request.Builder().url(url).post(formBody).build()
+        okHttpClient!!.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
+            }
+
+            @Throws(IOException::class)
+            override fun onResponse(call: Call, response: Response) {
+                runOnUiThread {
+                    var allUnavailableChairs = response.body!!.string()
+                    val convertedObject: JsonArray = Gson().fromJson(allUnavailableChairs, JsonArray::class.java)
+                    for (row in convertedObject) {
+                        var rowNew = row.toString().replace("\\","").drop(1).dropLast(1)
+                        val jsonObject = JsonParser().parse(rowNew).asJsonObject
+                        val buildingRow = jsonObject["building"].toString().drop(1).dropLast(1)
+                        val roomRow = jsonObject["room"].toString().drop(1).dropLast(1)
+                        val chairIdRow = jsonObject["chairId"].toString().drop(1).dropLast(1)
+                        var idRow = jsonObject["id"].toString().drop(1).dropLast(1)
+                        if (buildingRow == building && roomRow == room) {
+                            for (b in setChairs) {
+                                if (b.text.toString() == chairIdRow) {
+                                    b.isEnabled = false
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
+        })
     }
 
     private fun enableUnavailableChairs(){
@@ -134,58 +143,79 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         //define all the chairs:
         val chairIdButton1 :Button = findViewById(R.id.chair_id_1)
         val chairIdButton2 :Button = findViewById(R.id.chair_id_2)
+        val chairIdButton3 :Button = findViewById(R.id.chair_id_3)
+        val chairIdButton4 :Button = findViewById(R.id.chair_id_4)
+        val chairIdButton5 :Button = findViewById(R.id.chair_id_5)
+        val chairIdButton6 :Button = findViewById(R.id.chair_id_6)
+        val chairIdButton7 :Button = findViewById(R.id.chair_id_7)
+        val chairIdButton8 :Button = findViewById(R.id.chair_id_8)
+        val chairIdButton9 :Button = findViewById(R.id.chair_id_9)
+        val chairIdButton10 :Button = findViewById(R.id.chair_id_10)
+        val chairIdButton11 :Button = findViewById(R.id.chair_id_11)
+        val chairIdButton12 :Button = findViewById(R.id.chair_id_12)
+        val chairIdButton13 :Button = findViewById(R.id.chair_id_13)
+        val chairIdButton14 :Button = findViewById(R.id.chair_id_14)
+        val chairIdButton15 :Button = findViewById(R.id.chair_id_15)
+        val chairIdButton16 :Button = findViewById(R.id.chair_id_16)
+        val chairIdButton17 :Button = findViewById(R.id.chair_id_17)
+        val chairIdButton18 :Button = findViewById(R.id.chair_id_18)
+        val chairIdButton19 :Button = findViewById(R.id.chair_id_19)
+        val chairIdButton20 :Button = findViewById(R.id.chair_id_20)
 
         setChairs = setChairs.plusElement(chairIdButton1)
         setChairs = setChairs.plusElement(chairIdButton2)
+        setChairs = setChairs.plusElement(chairIdButton3)
+        setChairs = setChairs.plusElement(chairIdButton4)
+        setChairs = setChairs.plusElement(chairIdButton5)
+        setChairs = setChairs.plusElement(chairIdButton6)
+        setChairs = setChairs.plusElement(chairIdButton7)
+        setChairs = setChairs.plusElement(chairIdButton8)
+        setChairs = setChairs.plusElement(chairIdButton9)
+        setChairs = setChairs.plusElement(chairIdButton10)
+        setChairs = setChairs.plusElement(chairIdButton11)
+        setChairs = setChairs.plusElement(chairIdButton12)
+        setChairs = setChairs.plusElement(chairIdButton13)
+        setChairs = setChairs.plusElement(chairIdButton14)
+        setChairs = setChairs.plusElement(chairIdButton15)
+        setChairs = setChairs.plusElement(chairIdButton16)
+        setChairs = setChairs.plusElement(chairIdButton17)
+        setChairs = setChairs.plusElement(chairIdButton18)
+        setChairs = setChairs.plusElement(chairIdButton19)
+        setChairs = setChairs.plusElement(chairIdButton20)
 
         chairIdButton1.setOnClickListener(this)
         chairIdButton2.setOnClickListener(this)
+        chairIdButton3.setOnClickListener(this)
+        chairIdButton4.setOnClickListener(this)
+        chairIdButton5.setOnClickListener(this)
+        chairIdButton6.setOnClickListener(this)
+        chairIdButton7.setOnClickListener(this)
+        chairIdButton8.setOnClickListener(this)
+        chairIdButton9.setOnClickListener(this)
+        chairIdButton10.setOnClickListener(this)
+        chairIdButton11.setOnClickListener(this)
+        chairIdButton12.setOnClickListener(this)
+        chairIdButton13.setOnClickListener(this)
+        chairIdButton14.setOnClickListener(this)
+        chairIdButton15.setOnClickListener(this)
+        chairIdButton16.setOnClickListener(this)
+        chairIdButton17.setOnClickListener(this)
+        chairIdButton18.setOnClickListener(this)
+        chairIdButton19.setOnClickListener(this)
+        chairIdButton20.setOnClickListener(this)
+
+
         //finish to define all the chairs
-        //getUnavailableSeatsFromJson()
         //enableUnavailableChairs()
 
         var allUnavailableChairs = ""
         val reservationBasicDetails = ReservationBasicDetails(
-            //userName.toString(),
-            //date.toString(), time.toString(), duration.toString(), "1"
-            "1","26/06/22", "21:00", "120", "1"
+            userName.toString(),
+            date.toString(), time.toString(), duration.toString(), "1"
+                //"1","26/06/22", "21:00", "120", "1"
         )
-        val reservationBasicDetailsJson = mapper.writeValueAsString(reservationBasicDetails)
 
-        val text = reservationBasicDetailsJson.toString()
-        val formBody: RequestBody = FormBody.Builder().add("reservationTimeDate", text).build()
-        val s = SimpleDataClasses()
-        val url = s.serverURL + s.serverGetUnavailableChairs
-        val request: Request = Request.Builder().url(url).post(formBody).build()
-        okHttpClient!!.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                runOnUiThread {
-                    var y = response.body
-                    allUnavailableChairs = response.body!!.string()
-                    val convertedObject: JsonArray = Gson().fromJson(allUnavailableChairs, JsonArray::class.java)
-                    for (row in convertedObject) {
-                        var rowNew = row.toString().replace("\\","").drop(1).dropLast(1)
-                        val jsonObject = JsonParser().parse(rowNew).asJsonObject
-                        val buildingRow = jsonObject["building"].toString().drop(1).dropLast(1)
-                        val roomRow = jsonObject["room"].toString().drop(1).dropLast(1)
-                        val chairIdRow = jsonObject["chairId"].toString().drop(1).dropLast(1)
-                        var idRow = jsonObject["id"].toString().drop(1).dropLast(1)
-                        if (buildingRow == building && roomRow == room) {
-                            for (b in setChairs) {
-                                if (b.text.toString() == chairIdRow) {
-                                    b.isEnabled = false
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        })
+        getUnavailableSeatsFromJson(reservationBasicDetails)
 
         buttonClickSendReservation = findViewById(R.id.send_location)
         val localButtonClickSendReservation = buttonClickSendReservation

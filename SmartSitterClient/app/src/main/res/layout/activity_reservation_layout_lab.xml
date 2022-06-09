@@ -65,11 +65,11 @@
             android:text="@string/_1"
             android:textSize="12sp"
             app:layout_constraintTop_toTopOf="@+id/imageView"
-            android:layout_marginTop="42dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            android:layout_marginBottom="655dp" android:layout_marginEnd="420dp" android:layout_marginRight="420dp"
+            android:layout_marginTop="85dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="610dp" android:layout_marginRight="400dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
-            android:layout_marginLeft="159dp" android:layout_marginStart="159dp"
-            app:layout_constraintHorizontal_bias="0.29" app:layout_constraintVertical_bias="0.048"/>
+            android:layout_marginLeft="180dp" android:layout_marginStart="180dp" android:layout_marginEnd="400dp"/>
+
     <Button
             android:id="@+id/chair_id_2"
             android:layout_width="25dp"
@@ -78,11 +78,262 @@
             android:text="@string/_2"
             android:textSize="12sp"
             app:layout_constraintTop_toTopOf="@+id/imageView"
-            android:layout_marginTop="42dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            android:layout_marginBottom="655dp" android:layout_marginEnd="420dp" android:layout_marginRight="420dp"
+            android:layout_marginTop="85dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="610dp" android:layout_marginRight="365dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
-            android:layout_marginLeft="159dp" android:layout_marginStart="159dp"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.048"/>
+            android:layout_marginLeft="215dp" android:layout_marginStart="215dp" android:layout_marginEnd="365dp"/>
+
+    <Button
+            android:id="@+id/chair_id_3"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_3"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="85dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="610dp" android:layout_marginRight="330dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="250dp" android:layout_marginStart="250dp" android:layout_marginEnd="330dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_4"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="180dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="515dp" android:layout_marginEnd="395dp" android:layout_marginRight="395dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="185dp" android:layout_marginStart="185dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_5"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_5"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="180dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="515dp" android:layout_marginEnd="360dp" android:layout_marginRight="360dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="220dp" android:layout_marginStart="220dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_6"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_6"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="180dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="515dp" android:layout_marginEnd="330dp" android:layout_marginRight="330dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="250dp" android:layout_marginStart="250dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_7"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_7"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="180dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="515dp" android:layout_marginEnd="245dp" android:layout_marginRight="245dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="335dp" android:layout_marginStart="335dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_8"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_8"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="180dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="515dp" android:layout_marginEnd="210dp" android:layout_marginRight="210dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="370dp" android:layout_marginStart="370dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_9"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_9"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="180dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="515dp" android:layout_marginEnd="175dp" android:layout_marginRight="175dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="405dp" android:layout_marginStart="405dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_10"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_10"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="272dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="423dp" android:layout_marginEnd="395dp" android:layout_marginRight="395dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="185dp" android:layout_marginStart="185dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_11"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_11"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="272dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="423dp" android:layout_marginEnd="360dp" android:layout_marginRight="360dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="220dp" android:layout_marginStart="220dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_12"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_12"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="272dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="423dp" android:layout_marginEnd="330dp" android:layout_marginRight="330dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="250dp" android:layout_marginStart="250dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_13"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_13"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="260dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="435dp" android:layout_marginEnd="245dp" android:layout_marginRight="245dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="335dp" android:layout_marginStart="335dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_14"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_14"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="260dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="435dp" android:layout_marginEnd="210dp" android:layout_marginRight="210dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="370dp" android:layout_marginStart="370dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_15"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_15"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="260dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="435dp" android:layout_marginEnd="175dp" android:layout_marginRight="175dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="405dp" android:layout_marginStart="405dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_16"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_16"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="364dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="331dp" android:layout_marginEnd="395dp" android:layout_marginRight="395dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="185dp" android:layout_marginStart="185dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_17"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_17"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="364dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="331dp" android:layout_marginEnd="360dp" android:layout_marginRight="360dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="220dp" android:layout_marginStart="220dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_18"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_18"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="364dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="331dp" android:layout_marginEnd="330dp" android:layout_marginRight="330dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="250dp" android:layout_marginStart="250dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_19"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_19"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="342dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="353dp" android:layout_marginEnd="245dp" android:layout_marginRight="245dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="335dp" android:layout_marginStart="335dp"/>
+
+
+    <Button
+            android:id="@+id/chair_id_20"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/chair_id_custom_butten"
+            android:text="@string/_20"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="342dp" app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            android:layout_marginBottom="353dp" android:layout_marginEnd="210dp" android:layout_marginRight="245dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/imageView"
+            android:layout_marginLeft="370dp" android:layout_marginStart="370dp"/>
+
     <Button
             android:id="@+id/send_location"
             android:layout_width="81dp"
