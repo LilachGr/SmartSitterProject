@@ -88,6 +88,8 @@ def check_lab_choice(parameters):
 
 def get_unavailable_chairs_location(date_reservation, start_time, end_time):
     ans = get_all_unavailable_chairs(date_reservation, start_time, end_time)
+    if len(ans) == 0:
+        return ""
     list_of_chairs_id = []
     for row in ans:
         chair = row[7]
@@ -100,8 +102,8 @@ def get_unavailable_chairs_location(date_reservation, start_time, end_time):
     j = json.loads(json.dumps(json_data))
     return str(j)
 
-# ans = get_unavailable_chairs_location("26/06/22", "21:00", "22:00")
-# print(ans)
+# ans2 = get_unavailable_chairs_location("12/12/22", "21:00", "22:00")
+# print(f"s:{ans2}")
 
 """
     this function decide if the reservation is now or decided by algorithm.

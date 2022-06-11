@@ -2,10 +2,7 @@ package com.example.smartsitterclient
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.*
@@ -26,10 +23,11 @@ class ReservationFirstStepActivity : AppCompatActivity() {
     private var okHttpClient: OkHttpClient? = null
     private var myServerResponse: String? = null
     private var reservationLaterMessage: TextView? = null
+    private var spinnerDuration: Spinner? = null
+    private var myAdapter: ArrayAdapter<String>? = null
     private var thisReservationActivity: ReservationFirstStepActivity? = null
     private var nextButton: Button? = null
 
-    //private var dropdown: Spinner? = null
     private val mapper = jacksonObjectMapper()
 
     private fun validDate(strDate: String): Boolean {
@@ -65,26 +63,21 @@ class ReservationFirstStepActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       /* //get the spinner from the xml.
-        dropdown = findViewById(R.id.student_number)
-        //create a list of items for the spinner.
-        val items = arrayOf(1, 2, 3,4,5)
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        val adapter = ArrayAdapter(this, R.layout.activity_reservation_first_step, items)
-        //set the spinners adapter to the previously created one.
-        val localDropdown = dropdown
-        if (localDropdown != null) {
-            localDropdown.adapter = adapter
-        }
-        dropdown = localDropdown*/
-
         setContentView(R.layout.activity_reservation_first_step)
+
+        spinnerDuration = findViewById(R.id.spinner_duration_layout)
+        myAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resources.getStringArray(R.array.spinner_duration))
+        myAdapter!!.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+        val localSpinnerDuration = spinnerDuration
+        if (localSpinnerDuration != null) {
+            localSpinnerDuration.adapter = myAdapter
+        }
+        spinnerDuration = localSpinnerDuration
 
         //userName = findViewById(R.id.user_name)
         dateReservation = findViewById(R.id.date_reservation)
         timeReservation = findViewById(R.id.time_reservation)
-        duration = findViewById(R.id.duration)
+        //duration = findViewById(R.id.duration)
 
         reservationLaterMessage = findViewById(R.id.reservation_later_message)
         sendButton = findViewById(R.id.send_reservation)
@@ -96,7 +89,10 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         var localDateReservation: EditText? = null
         var localTimeReservation: EditText? = null
         var localDuration: EditText? = null
+        //var localDuration: Spinner? = null
         var stringServer: String? = null
+        var localDuration2: Spinner? = null
+        var localDurationString = ""
 
         var idUserName: String = ""
 
@@ -112,6 +108,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             localDateReservation = dateReservation
             localTimeReservation = timeReservation
             localDuration = duration
+            localDuration2 = spinnerDuration
+            localDurationString = localDuration2!!.selectedItem.toString()
 
             val isValidDate: Boolean = validDate(localDateReservation?.text.toString())
             if (!isValidDate) {
@@ -137,7 +135,9 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 //localUserName?.text.toString(),
                 userName,
                 localDateReservation?.text.toString(), localTimeReservation?.text.toString(),
-                localDuration?.text.toString(), "1"
+                //localDuration?.text.toString(),
+                localDurationString,
+                "1"
             )
             val reservationBasicDetailsJson = mapper.writeValueAsString(reservationBasicDetails)
 
@@ -187,7 +187,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 i.putExtra("idUserName", userName)
                 i.putExtra("date", localDateReservation?.text.toString())
                 i.putExtra("time", localTimeReservation?.text.toString())
-                i.putExtra("duration", localDuration?.text.toString())
+                //i.putExtra("duration", localDuration?.text.toString())
+                i.putExtra("duration", localDurationString)
                 startActivity(i)
             }
         }

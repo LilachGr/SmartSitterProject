@@ -57,6 +57,9 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {
                     var allUnavailableChairs = response.body!!.string()
+                    if (allUnavailableChairs == ""){
+                        return@runOnUiThread
+                    }
                     val convertedObject: JsonArray = Gson().fromJson(allUnavailableChairs, JsonArray::class.java)
                     for (row in convertedObject) {
                         var rowNew = row.toString().replace("\\","").drop(1).dropLast(1)
@@ -78,63 +81,24 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun enableUnavailableChairs(){
-        var allUnavailableChairs = ""
-        val reservationBasicDetails = ReservationBasicDetails(
-            userName.toString(),
-            date.toString(), time.toString(), duration.toString(), "1"
-        )
-        val reservationBasicDetailsJson = mapper.writeValueAsString(reservationBasicDetails)
-
-        val text = reservationBasicDetailsJson.toString()
-        val formBody: RequestBody = FormBody.Builder().add("reservationTimeDate", text).build()
-        val s = SimpleDataClasses()
-        val url = s.serverURL + s.serverGetUnavailableChairs
-        val request: Request = Request.Builder().url(url).post(formBody).build()
-        okHttpClient!!.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                runOnUiThread {
-                    allUnavailableChairs = response.body!!.string()
-                    var listAllUnavailableChairs = allUnavailableChairs.toList()
-                    for (row in listAllUnavailableChairs) {
-                        //var listRow = row.to
-                        // id, reservation_date , start_time , end_time , duration , num_of_participants , user_id , location_id , updated
-                        //var reservationDateSql = row[1]
-                        print(row)
-                    }
-                }
-            }
-        })
-
-"""        val isEnabled = false
-        if (isEnabled){
-            chairIdButton1.isEnabled = false
-        }"""
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_layout_lab)
 
-        viewPreviousData = findViewById(R.id.previous_data)
+        //viewPreviousData = findViewById(R.id.previous_data)
         viewChosenChairId = findViewById(R.id.chosen_chair_id)
 
         val extras = intent.extras
         if (extras != null) {
-            val localPreviousData = viewPreviousData
+            //val localPreviousData = viewPreviousData
             userName = extras.getString("idUserName")
             time = extras.getString("time")
             date = extras.getString("date")
             duration = extras.getString("duration")
             date = date.toString()
             val tempText = "Date: $date, Time: $time, Duration: $duration"
-            localPreviousData?.text = tempText
-            viewPreviousData = localPreviousData
+            //localPreviousData?.text = tempText
+            //viewPreviousData = localPreviousData
         }
 
         okHttpClient = OkHttpClient()
@@ -161,6 +125,25 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         val chairIdButton18 :Button = findViewById(R.id.chair_id_18)
         val chairIdButton19 :Button = findViewById(R.id.chair_id_19)
         val chairIdButton20 :Button = findViewById(R.id.chair_id_20)
+        val chairIdButton21 :Button = findViewById(R.id.chair_id_21)
+        val chairIdButton22 :Button = findViewById(R.id.chair_id_22)
+        val chairIdButton23 :Button = findViewById(R.id.chair_id_23)
+        val chairIdButton24 :Button = findViewById(R.id.chair_id_24)
+        val chairIdButton25 :Button = findViewById(R.id.chair_id_25)
+        val chairIdButton26 :Button = findViewById(R.id.chair_id_26)
+        val chairIdButton27 :Button = findViewById(R.id.chair_id_27)
+        val chairIdButton28 :Button = findViewById(R.id.chair_id_28)
+        val chairIdButton29 :Button = findViewById(R.id.chair_id_29)
+        val chairIdButton30 :Button = findViewById(R.id.chair_id_30)
+        val chairIdButton31 :Button = findViewById(R.id.chair_id_31)
+        val chairIdButton32 :Button = findViewById(R.id.chair_id_32)
+        val chairIdButton33 :Button = findViewById(R.id.chair_id_33)
+        val chairIdButton34 :Button = findViewById(R.id.chair_id_34)
+        val chairIdButton35 :Button = findViewById(R.id.chair_id_35)
+        val chairIdButton36 :Button = findViewById(R.id.chair_id_36)
+        val chairIdButton37 :Button = findViewById(R.id.chair_id_37)
+        val chairIdButton38 :Button = findViewById(R.id.chair_id_38)
+        val chairIdButton39 :Button = findViewById(R.id.chair_id_39)
 
         setChairs = setChairs.plusElement(chairIdButton1)
         setChairs = setChairs.plusElement(chairIdButton2)
@@ -182,6 +165,25 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         setChairs = setChairs.plusElement(chairIdButton18)
         setChairs = setChairs.plusElement(chairIdButton19)
         setChairs = setChairs.plusElement(chairIdButton20)
+        setChairs = setChairs.plusElement(chairIdButton21)
+        setChairs = setChairs.plusElement(chairIdButton22)
+        setChairs = setChairs.plusElement(chairIdButton23)
+        setChairs = setChairs.plusElement(chairIdButton24)
+        setChairs = setChairs.plusElement(chairIdButton25)
+        setChairs = setChairs.plusElement(chairIdButton26)
+        setChairs = setChairs.plusElement(chairIdButton27)
+        setChairs = setChairs.plusElement(chairIdButton28)
+        setChairs = setChairs.plusElement(chairIdButton29)
+        setChairs = setChairs.plusElement(chairIdButton30)
+        setChairs = setChairs.plusElement(chairIdButton31)
+        setChairs = setChairs.plusElement(chairIdButton32)
+        setChairs = setChairs.plusElement(chairIdButton33)
+        setChairs = setChairs.plusElement(chairIdButton34)
+        setChairs = setChairs.plusElement(chairIdButton35)
+        setChairs = setChairs.plusElement(chairIdButton36)
+        setChairs = setChairs.plusElement(chairIdButton37)
+        setChairs = setChairs.plusElement(chairIdButton38)
+        setChairs = setChairs.plusElement(chairIdButton39)
 
         chairIdButton1.setOnClickListener(this)
         chairIdButton2.setOnClickListener(this)
@@ -203,12 +205,27 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         chairIdButton18.setOnClickListener(this)
         chairIdButton19.setOnClickListener(this)
         chairIdButton20.setOnClickListener(this)
-
-
+        chairIdButton21.setOnClickListener(this)
+        chairIdButton22.setOnClickListener(this)
+        chairIdButton23.setOnClickListener(this)
+        chairIdButton24.setOnClickListener(this)
+        chairIdButton25.setOnClickListener(this)
+        chairIdButton26.setOnClickListener(this)
+        chairIdButton27.setOnClickListener(this)
+        chairIdButton28.setOnClickListener(this)
+        chairIdButton29.setOnClickListener(this)
+        chairIdButton30.setOnClickListener(this)
+        chairIdButton31.setOnClickListener(this)
+        chairIdButton32.setOnClickListener(this)
+        chairIdButton33.setOnClickListener(this)
+        chairIdButton34.setOnClickListener(this)
+        chairIdButton35.setOnClickListener(this)
+        chairIdButton36.setOnClickListener(this)
+        chairIdButton37.setOnClickListener(this)
+        chairIdButton38.setOnClickListener(this)
+        chairIdButton39.setOnClickListener(this)
         //finish to define all the chairs
-        //enableUnavailableChairs()
 
-        var allUnavailableChairs = ""
         val reservationBasicDetails = ReservationBasicDetails(
             userName.toString(),
             date.toString(), time.toString(), duration.toString(), "1"
@@ -226,7 +243,7 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
 
                 val reservationAllDetails = ReservationAllDetails(
                     userName.toString(), date.toString(), time.toString(), duration.toString(),
-                    "1", chairIdNumber.toString(), "202", "604"
+                    "1", chairIdNumber.toString(), room, building
                 )
                 val reservationAllDetailsJson = mapper1.writeValueAsString(reservationAllDetails)
 
@@ -260,11 +277,11 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         }
         buttonClickSendReservation = localButtonClickSendReservation
 
-        buttonClickNext = findViewById(R.id.next_button)
+        buttonClickNext = findViewById(R.id.home_button)
         val localButtonClickNext = buttonClickNext
         localButtonClickNext?.setOnClickListener {
             if (responseLabString != "error") {
-                startActivity(Intent(this, SignIn::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
         buttonClickNext = localButtonClickNext
