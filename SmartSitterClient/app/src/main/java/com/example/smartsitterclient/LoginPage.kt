@@ -57,6 +57,10 @@ class LoginPage : AppCompatActivity() {
         nextButton = findViewById(R.id.next_button)
         okHttpClient = OkHttpClient()
 
+        val localButtonClickNext2 = nextButton
+        localButtonClickNext2?.isEnabled = false
+        nextButton = localButtonClickNext2
+
         val localButton = sendButton
         var localUserName: EditText? = null
         var localPassword: EditText? = null
@@ -66,6 +70,9 @@ class LoginPage : AppCompatActivity() {
         val message = loginMessage
 
         localButton?.setOnClickListener {
+            message?.text = ""
+            loginMessage = message
+
             localUserName = userName
             localPassword = password
             localRepeatPassword = repeatPassword
@@ -74,7 +81,7 @@ class LoginPage : AppCompatActivity() {
             val isValidEmail: Boolean = validEmailUniversity(localEmailUniversity?.text.toString())
             if (!isValidEmail) {
                 localError = "error"
-                val stringTemp2 = "Your email is not accurate university email. Please TRY AGAIN!!"
+                val stringTemp2 = "Your email is not a valid university email."
                 message?.text = stringTemp2
                 loginMessage = message
                 return@setOnClickListener
@@ -83,7 +90,7 @@ class LoginPage : AppCompatActivity() {
             val isValidPassword: Boolean = validPassword(localPassword?.text.toString(), localRepeatPassword?.text.toString())
             if (!isValidPassword) {
                 localError = "error"
-                val stringTemp2 = "Your password is not valid password. Please TRY AGAIN!!"
+                val stringTemp2 = "The password and repeat password must match."
                 message?.text = stringTemp2
                 loginMessage = message
                 return@setOnClickListener
@@ -114,8 +121,12 @@ class LoginPage : AppCompatActivity() {
                         val localLoginMessage = loginMessage
                         var stringTemp: String? = null
                         if (localError == "error") {
-                            stringTemp = "Your registration details are not correct. Please TRY AGAIN!!"
+                            stringTemp = "Your registration details are incorrect.\nPlease try again!"
                         } else{
+                            localButton.isEnabled = false
+                            val localButtonClickNext = nextButton
+                            localButtonClickNext?.isEnabled = true
+                            nextButton = localButtonClickNext
                             stringTemp = "Data received!!"
                         }
                         localLoginMessage?.text = stringTemp

@@ -36,7 +36,7 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
 
 
     private fun functionPerChair(chairId: String, localViewChosenChairId: TextView) {
-        val temp = ", chosen chair: $chairId"
+        val temp = "Building: $building, room: $room, chosen chair: $chairId"
         localViewChosenChairId.text = temp
     }
 
@@ -85,8 +85,13 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_layout_lab)
 
+        buttonClickNext = findViewById(R.id.home_button)
+        val localButtonClickNext2 = buttonClickNext
+        localButtonClickNext2?.isEnabled = false
+        buttonClickNext = localButtonClickNext2
+
         //viewPreviousData = findViewById(R.id.previous_data)
-        viewChosenChairId = findViewById(R.id.chosen_chair_id)
+        viewChosenChairId = findViewById(R.id.chosen_room_building)
 
         val extras = intent.extras
         if (extras != null) {
@@ -264,10 +269,14 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
                             if (responseLabString == "error") {
                                 Toast.makeText(
                                     applicationContext,
-                                    "Your chosen chair it taken, please try again!!!",
+                                    "Your chosen chair it taken.\nPlease choose a different chair.",
                                     Toast.LENGTH_LONG
                                 ).show()
                             } else if (responseLabString == "true") {
+                                localButtonClickSendReservation.isEnabled = false
+                                val localButtonClickNext = buttonClickNext
+                                localButtonClickNext?.isEnabled = true
+                                buttonClickNext = localButtonClickNext
                                 Toast.makeText(applicationContext, "Data received!!", Toast.LENGTH_LONG).show()
                             }
                         }

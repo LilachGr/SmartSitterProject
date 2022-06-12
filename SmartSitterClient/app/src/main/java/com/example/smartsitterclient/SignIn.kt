@@ -28,6 +28,7 @@ class SignIn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+
         userName = findViewById(R.id.user_name)
         password = findViewById(R.id.password)
         sendButton = findViewById(R.id.send_sign_in)
@@ -35,6 +36,11 @@ class SignIn : AppCompatActivity() {
         loginButton = findViewById(R.id.login_button)
         message = findViewById(R.id.sign_in_message)
         okHttpClient = OkHttpClient()
+
+
+        val localButtonClickNext = nextButton
+        localButtonClickNext?.isEnabled = false
+        nextButton = localButtonClickNext
 
         val localSendButton = sendButton
         var localUserName: EditText? = null
@@ -45,6 +51,9 @@ class SignIn : AppCompatActivity() {
         localSendButton?.setOnClickListener {
             localUserName = userName
             localPassword = password
+
+            localMessage?.text = ""
+            message = localMessage
 
             val signInDetails = SignInDetails(
                 localUserName?.text.toString(),
@@ -70,8 +79,12 @@ class SignIn : AppCompatActivity() {
                         localErrorOrId = response.body!!.string()
                         var stringTemp: String? = null
                         if (localErrorOrId == "error") {
-                            stringTemp = "Your sign in details are not correct. Please TRY AGAIN!!"
+                            stringTemp = "Your sign in details are incorrect.\nPlease try again."
                         } else {
+                            localSendButton.isEnabled = false
+                            val localButtonClickNext2 = nextButton
+                            localButtonClickNext2?.isEnabled = true
+                            nextButton = localButtonClickNext2
                             stringTemp = "Welcome " + localUserName?.text.toString()
                         }
                         localMessage?.text = stringTemp

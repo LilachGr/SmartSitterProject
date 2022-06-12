@@ -85,6 +85,10 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         okHttpClient = OkHttpClient()
         val localButton = sendButton
 
+        val localButtonClickNext = nextButton
+        localButtonClickNext?.isEnabled = false
+        nextButton = localButtonClickNext
+
         var localUserName: EditText? = null
         var localDateReservation: EditText? = null
         var localTimeReservation: EditText? = null
@@ -104,6 +108,10 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         userName = idUserName
 
         localButton?.setOnClickListener {
+            val localViewDateTime = reservationLaterMessage
+            localViewDateTime?.text = ""
+            reservationLaterMessage = localViewDateTime
+
             //localUserName = userName
             localDateReservation = dateReservation
             localTimeReservation = timeReservation
@@ -115,7 +123,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             if (!isValidDate) {
                 val localViewDateTime = reservationLaterMessage
                 stringServer = "error"
-                val stringTemp2 = "Your reservation details are not correct. Please TRY AGAIN!!"
+                val stringTemp2 = "Your reservation details are incorrect.\nPlease use a date in the format DD/MM/YY"
                 localViewDateTime?.text = stringTemp2
                 reservationLaterMessage = localViewDateTime
                 return@setOnClickListener
@@ -125,7 +133,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             if (!isValidTime) {
                 val localViewDateTime = reservationLaterMessage
                 stringServer = "error"
-                val stringTemp2 = "Your reservation details are not correct. Please TRY AGAIN!!"
+                val stringTemp2 = "Your reservation details are incorrect.\nPlease use a time in the format HH:MM"
                 localViewDateTime?.text = stringTemp2
                 reservationLaterMessage = localViewDateTime
                 return@setOnClickListener
@@ -161,16 +169,22 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                         val localViewDateTime = reservationLaterMessage
                         var stringTemp: String? = null
                         if (stringServer == "time_available") {
+                            localButton.isEnabled = false
+                            val localButtonClickNext2 = nextButton
+                            localButtonClickNext2?.isEnabled = true
+                            nextButton = localButtonClickNext2
                             stringTemp = "Data received!!"
                         }
                         if (stringServer == "time_not_available") {
-                            stringTemp = "Your chosen time is full, please choose another time!!"
+                            stringTemp = "There are no available places in the date and time you chose.\n" +
+                                    "Please try changing the date or time."
                         }
                         if (stringServer == "user_has_this_date") {
-                            stringTemp = "Your already booked in this date, please choose another date!!"
+                            stringTemp = "You already have a reservation on this date.\nPlease choose a different date."
                         }
                         if (stringServer == "smaller_date_time") {
-                            stringTemp = "Your reservation details are not correct. Please TRY AGAIN!!"
+                            stringTemp = "You cannot choose a time in the past.\n" +
+                                    "Please try changing the date or time."
                         }
                         localViewDateTime?.text = stringTemp
                         reservationLaterMessage = localViewDateTime
