@@ -74,8 +74,10 @@
 
     <Button
             android:id="@+id/send_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/send_custom_button"
+            android:textAlignment="center"
             android:text="@string/send"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="429dp" app:layout_constraintStart_toStartOf="parent"
@@ -97,8 +99,10 @@
             app:layout_constraintHorizontal_bias="0.5"/>
     <Button
             android:id="@+id/next_button"
-            android:layout_width="75dp"
-            android:layout_height="42dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/next_custom_button"
+            android:textAlignment="center"
             android:text="@string/next"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="307dp" android:layout_marginStart="307dp"

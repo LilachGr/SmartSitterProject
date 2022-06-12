@@ -20,7 +20,7 @@
     <string name="title_reservation_first_step">Choose your reservation date and time</string>
     <string name="sign_in">Sign in</string>
     <string name="registration_to_the_app">Registration to the app</string>
-    <string name="building_room">building: 604, room: 202, quite class</string>
+    <string name="building_room">building: 604, room: 202</string>
     <string name="todo">TODO</string>
     <string name="_1">1</string>
     <string name="_2">2</string>

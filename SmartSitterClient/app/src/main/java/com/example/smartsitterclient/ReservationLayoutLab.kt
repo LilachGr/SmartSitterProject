@@ -36,7 +36,7 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
 
 
     private fun functionPerChair(chairId: String, localViewChosenChairId: TextView) {
-        val temp = "chosen chair: $chairId"
+        val temp = ", chosen chair: $chairId"
         localViewChosenChairId.text = temp
     }
 
