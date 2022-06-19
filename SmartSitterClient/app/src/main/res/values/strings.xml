@@ -4,7 +4,7 @@
     <string name="this_is_second_page">This is second page!!!!!!!!!!!</string>
     <string name="send">Send</string>
     <string name="enter_any_text">Enter any text</string>
-    <string name="reservation">Reservation</string>
+    <string name="reservation">Start</string>
     <string name="user_name">User name</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
@@ -19,7 +19,7 @@
     <string name="repeat_password">Repeat password</string>
     <string name="title_reservation_first_step">Choose your reservation date and time</string>
     <string name="sign_in">Sign in</string>
-    <string name="registration_to_the_app">Registration to the app</string>
+    <string name="registration_to_the_app">Register</string>
     <string name="building_room">Building: 604, room: 202</string>
     <string name="todo">TODO</string>
     <string name="_1">1</string>
@@ -62,7 +62,8 @@
     <string name="_38">38</string>
     <string name="_39">39</string>
     <string name="home_page">Done</string>
-    
+    <string name="registration_message">First time in this app? Register here...</string>
+
     <string-array name="spinner_duration">
         <item>30</item>
         <item>60</item>

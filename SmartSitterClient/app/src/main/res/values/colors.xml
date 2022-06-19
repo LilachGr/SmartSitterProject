@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#068668</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="black">#000000</color>
-    <color name="colorAppBarFirst">#0B8F81</color>
-    <color name="colorTurquoiseLight">#20BDB9</color>
+    <color name="colorAppBarFirst">#339999</color>
+    <color name="colorTurquoiseSecond">#1f706b</color>
+    <!--<color name="colorTurquoiseLight">#0AAC9A</color>#048080,,,,3EB6AC,,,,,,,,,,,,,268779-->
     <color name="colorPurple">#7B60BD</color>
-    <color name="colorButtonID">#00574B</color>
+    <color name="colorBrightPurple">#CC99FF</color>
+    <color name="colorButtonID">#50d4c2</color>
     <color name="colorDisabled">#A9A9A9</color>
+    <color name="colorBrightText">#ffffff</color>
 </resources>

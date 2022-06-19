@@ -54,6 +54,7 @@ class SignIn : AppCompatActivity() {
 
             localMessage?.text = ""
             message = localMessage
+            localSendButton.isEnabled = false
 
             val signInDetails = SignInDetails(
                 localUserName?.text.toString(),
@@ -70,7 +71,10 @@ class SignIn : AppCompatActivity() {
             val request: Request = Request.Builder().url(url).post(formBody).build()
             okHttpClient!!.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
+                    runOnUiThread {
+                        Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show()
+                        localSendButton.isEnabled = true
+                    }
                 }
 
                 @Throws(IOException::class)
@@ -80,6 +84,7 @@ class SignIn : AppCompatActivity() {
                         var stringTemp: String? = null
                         if (localErrorOrId == "error") {
                             stringTemp = "Your sign in details are incorrect.\nPlease try again."
+                            localSendButton.isEnabled = true
                         } else {
                             localSendButton.isEnabled = false
                             val localButtonClickNext2 = nextButton

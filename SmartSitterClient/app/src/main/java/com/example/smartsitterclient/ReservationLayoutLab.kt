@@ -245,7 +245,7 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
             if (chairIdNumber != 0){
                 // some chair is chosen and chairIdNumber contain it.
                 // connect to server and try to insert the values, and return the result.
-
+                localButtonClickSendReservation.isEnabled = false
                 val reservationAllDetails = ReservationAllDetails(
                     userName.toString(), date.toString(), time.toString(), duration.toString(),
                     "1", chairIdNumber.toString(), room, building
@@ -259,7 +259,9 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
                 val request1: Request = Request.Builder().url(url1).post(formBody1).build()
                 okHttpClient1!!.newCall(request1).enqueue(object : Callback {
                     override fun onFailure(call: Call, e: IOException) {
-                        runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
+                        runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show()
+                            localButtonClickSendReservation.isEnabled = true
+                        }
                     }
 
                     @Throws(IOException::class)
@@ -267,6 +269,7 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
                         runOnUiThread {
                             responseLabString = response.body!!.string()
                             if (responseLabString == "error") {
+                                localButtonClickSendReservation.isEnabled = true
                                 Toast.makeText(
                                     applicationContext,
                                     "Your chosen chair it taken.\nPlease choose a different chair.",
