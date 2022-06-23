@@ -84,6 +84,9 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_layout_lab)
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setLogo(R.mipmap.my_logo_round);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
 
         buttonClickNext = findViewById(R.id.home_button)
         val localButtonClickNext2 = buttonClickNext
@@ -259,7 +262,9 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
                 val request1: Request = Request.Builder().url(url1).post(formBody1).build()
                 okHttpClient1!!.newCall(request1).enqueue(object : Callback {
                     override fun onFailure(call: Call, e: IOException) {
-                        runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show()
+                        runOnUiThread {
+                            val stringTemp = "server down"
+                            Toast.makeText(applicationContext, stringTemp, Toast.LENGTH_SHORT).show()
                             localButtonClickSendReservation.isEnabled = true
                         }
                     }

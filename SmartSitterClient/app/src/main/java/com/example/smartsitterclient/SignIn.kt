@@ -27,7 +27,9 @@ class SignIn : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setLogo(R.mipmap.my_logo_round);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
 
         userName = findViewById(R.id.user_name)
         password = findViewById(R.id.password)
@@ -72,7 +74,10 @@ class SignIn : AppCompatActivity() {
             okHttpClient!!.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
-                        Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show()
+                        val stringTemp = "server down"
+                        Toast.makeText(applicationContext, stringTemp, Toast.LENGTH_SHORT).show()
+                        localMessage?.text = stringTemp
+                        message = localMessage
                         localSendButton.isEnabled = true
                     }
                 }

@@ -47,6 +47,9 @@ class LoginPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setLogo(R.mipmap.my_logo_round);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
 
         userName = findViewById(R.id.user_name)
         password = findViewById(R.id.password)
@@ -70,6 +73,7 @@ class LoginPage : AppCompatActivity() {
         val message = loginMessage
 
         localButton?.setOnClickListener {
+            localButton.isEnabled = false
             message?.text = ""
             loginMessage = message
 
@@ -84,6 +88,7 @@ class LoginPage : AppCompatActivity() {
                 val stringTemp2 = "Your email is not a valid university email."
                 message?.text = stringTemp2
                 loginMessage = message
+                localButton.isEnabled = true
                 return@setOnClickListener
             }
 
@@ -93,6 +98,7 @@ class LoginPage : AppCompatActivity() {
                 val stringTemp2 = "The password and repeat password must match."
                 message?.text = stringTemp2
                 loginMessage = message
+                localButton.isEnabled = true
                 return@setOnClickListener
             }
 
@@ -111,7 +117,14 @@ class LoginPage : AppCompatActivity() {
             val request: Request = Request.Builder().url(url).post(formBody).build()
             okHttpClient!!.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
+                    runOnUiThread {
+                        val stringTemp = "server down"
+                        val localLoginMessage = loginMessage
+                        localLoginMessage?.text = stringTemp
+                        loginMessage = localLoginMessage
+                        localButton.isEnabled = true
+                        Toast.makeText(applicationContext, stringTemp, Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 @Throws(IOException::class)
@@ -121,6 +134,7 @@ class LoginPage : AppCompatActivity() {
                         val localLoginMessage = loginMessage
                         var stringTemp: String? = null
                         if (localError == "error") {
+                            localButton.isEnabled = true
                             stringTemp = "Your registration details are incorrect.\nPlease try again!"
                         } else{
                             localButton.isEnabled = false

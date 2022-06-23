@@ -64,6 +64,9 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_reservation_first_step)
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setLogo(R.mipmap.my_logo_round);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
 
         spinnerDuration = findViewById(R.id.spinner_duration_layout)
         myAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resources.getStringArray(R.array.spinner_duration))
@@ -108,6 +111,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         userName = idUserName
 
         localButton?.setOnClickListener {
+            localButton.isEnabled = false
             val localViewDateTime = reservationLaterMessage
             localViewDateTime?.text = ""
             reservationLaterMessage = localViewDateTime
@@ -126,6 +130,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 val stringTemp2 = "Your reservation details are incorrect.\nPlease use a date in the format DD/MM/YY"
                 localViewDateTime?.text = stringTemp2
                 reservationLaterMessage = localViewDateTime
+                localButton.isEnabled = true
                 return@setOnClickListener
             }
 
@@ -136,6 +141,7 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 val stringTemp2 = "Your reservation details are incorrect.\nPlease use a time in the format HH:MM"
                 localViewDateTime?.text = stringTemp2
                 reservationLaterMessage = localViewDateTime
+                localButton.isEnabled = true
                 return@setOnClickListener
             }
 
@@ -159,7 +165,13 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             thisReservationActivity = this
             okHttpClient!!.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread { Toast.makeText(applicationContext, "server down", Toast.LENGTH_SHORT).show() }
+                    runOnUiThread {
+                        val stringTemp = "server down"
+                        Toast.makeText(applicationContext, stringTemp, Toast.LENGTH_SHORT).show()
+                        localViewDateTime?.text = stringTemp
+                        reservationLaterMessage = localViewDateTime
+                        localButton.isEnabled = true
+                    }
                 }
 
                 @Throws(IOException::class)
@@ -176,13 +188,16 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                             stringTemp = "Data received!!"
                         }
                         if (stringServer == "time_not_available") {
+                            localButton.isEnabled = true
                             stringTemp = "There are no available places in the date and time you chose.\n" +
                                     "Please try changing the date or time."
                         }
                         if (stringServer == "user_has_this_date") {
+                            localButton.isEnabled = true
                             stringTemp = "You already have a reservation on this date.\nPlease choose a different date."
                         }
                         if (stringServer == "smaller_date_time") {
+                            localButton.isEnabled = true
                             stringTemp = "You cannot choose a time in the past.\n" +
                                     "Please try changing the date or time."
                         }
