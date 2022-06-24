@@ -117,7 +117,7 @@ class SignIn : AppCompatActivity() {
 
         val localLoginButton = loginButton
         localLoginButton?.setOnClickListener {
-            startActivity(Intent(this, LoginPage::class.java))
+            startActivity(Intent(this, RegistrationPage::class.java))
         }
         loginButton = localLoginButton
     }

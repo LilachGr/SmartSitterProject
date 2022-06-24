@@ -14,7 +14,7 @@ import okhttp3.*
 import java.io.IOException
 
 
-class LoginPage : AppCompatActivity() {
+class RegistrationPage : AppCompatActivity() {
     private var userName: EditText? = null
     private var password: EditText? = null
     private var repeatPassword: EditText? = null
@@ -46,7 +46,7 @@ class LoginPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_page)
+        setContentView(R.layout.activity_registration_page)
         supportActionBar?.setDisplayShowHomeEnabled(true);
         supportActionBar?.setLogo(R.mipmap.my_logo_round);
         supportActionBar?.setDisplayUseLogoEnabled(true);
