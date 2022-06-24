@@ -1,9 +1,5 @@
 package com.example.smartsitterclient
 
-
-//import android.R
-//import sun.jvm.hotspot.utilities.IntArray
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -17,8 +13,6 @@ import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
-    // declare attribute for textview
-    //var pageNameTextView: TextView? = null
     var buttonClick22: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

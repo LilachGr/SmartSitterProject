@@ -14,7 +14,6 @@ import java.util.*
 import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
 
 class ReservationFirstStepActivity : AppCompatActivity() {
-    //private var userName: EditText? = null
     private var userName: String = ""
     private var dateReservation: EditText? = null
     private var timeReservation: EditText? = null
@@ -77,10 +76,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         }
         spinnerDuration = localSpinnerDuration
 
-        //userName = findViewById(R.id.user_name)
         dateReservation = findViewById(R.id.date_reservation)
         timeReservation = findViewById(R.id.time_reservation)
-        //duration = findViewById(R.id.duration)
 
         reservationLaterMessage = findViewById(R.id.reservation_later_message)
         sendButton = findViewById(R.id.send_reservation)
@@ -125,11 +122,11 @@ class ReservationFirstStepActivity : AppCompatActivity() {
 
             val isValidDate: Boolean = validDate(localDateReservation?.text.toString())
             if (!isValidDate) {
-                val localViewDateTime = reservationLaterMessage
+                val localViewDateTime2 = reservationLaterMessage
                 stringServer = "error"
                 val stringTemp2 = "Your reservation details are incorrect.\nPlease use a date in the format DD/MM/YY"
-                localViewDateTime?.text = stringTemp2
-                reservationLaterMessage = localViewDateTime
+                localViewDateTime2?.text = stringTemp2
+                reservationLaterMessage = localViewDateTime2
                 localButton.isEnabled = true
                 return@setOnClickListener
             }

@@ -3,7 +3,6 @@ package com.example.smartsitterclient
 
 class SimpleDataClasses(){
     val serverURL = "http://10.100.102.57:5000/"
-    //val serverURL = "http://192.168.147.98:5000/"
     val serverReservationFirstStep = "timeAvailability"
     val serverLoginForm = "login"
     val serverSignInForm = "signIn"

@@ -237,7 +237,6 @@ class ReservationLayoutLab : AppCompatActivity(), View.OnClickListener {
         val reservationBasicDetails = ReservationBasicDetails(
             userName.toString(),
             date.toString(), time.toString(), duration.toString(), "1"
-                //"1","26/06/22", "21:00", "120", "1"
         )
 
         getUnavailableSeatsFromJson(reservationBasicDetails)
