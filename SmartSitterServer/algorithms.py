@@ -23,7 +23,8 @@ def check_time_availability(parameters):
     # check 2
     today = datetime.now()
     d = date_reservation.split('/')
-    start_date_time = datetime.strptime(f"{d[0] + '/' + d[1] + '/' + '20' + d[2]}", "%d/%m/%Y")
+    start_date_time = datetime.strptime(f"{d[0] + '/' + d[1] + '/' + '20' + d[2]} {start_time}", "%d/%m/%Y %H:%M:%S")
+    print(f"check if {start_date_time} < {today} : {start_date_time < today}")
     if start_date_time < today:
         return "smaller_date_time"
     # check 3
