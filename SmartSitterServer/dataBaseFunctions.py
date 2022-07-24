@@ -20,12 +20,12 @@ def connect_db():
         list of all rows that received from the query. 
 """
 def run_select_query(query):
-    conn = connect_db()
-    with conn.cursor() as cursor:
-        print(f"query: {query}")
-        cursor.execute(query)
-        ans = cursor.fetchall()
-        print(f"ans: {ans}")
+    with connect_db() as conn:
+        with conn.cursor() as cursor:
+            print(f"query: {query}")
+            cursor.execute(query)
+            ans = cursor.fetchall()
+            print(f"ans: {ans}")
     return ans
 
 
@@ -35,7 +35,7 @@ def run_select_query(query):
         query- string that represent correct insert query.
 """
 def run_insert_query(query):
-    conn = connect_db()
-    with conn.cursor() as cursor:
-        print(f"query: {query}")
-        cursor.execute(query)
+    with connect_db() as conn:
+        with conn.cursor() as cursor:
+            print(f"query: {query}")
+            cursor.execute(query)
