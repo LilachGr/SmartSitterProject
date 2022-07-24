@@ -3,13 +3,7 @@ package com.example.smartsitterclient
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.*
-//import sun.jvm.hotspot.utilities.IntArray
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {

@@ -72,7 +72,11 @@ def handle_login(parameters):
     return "true"
 
 
-""""""
+"""
+    parameters - string that contain JSON (text from client)
+    check if the lab choice is available, and if so insert it to the reservation table.
+    return "error" or "true"
+"""
 def check_lab_choice(parameters):
     user, date, start_time, duration, end_time, number, building, room, chair_id = \
         get_elements_for_reservation(parameters)
@@ -87,6 +91,10 @@ def check_lab_choice(parameters):
     return "true"
 
 
+"""
+    get all unavailable chairs that appears in the same date and time.
+    return json that contain all the unavailable places.
+"""
 def get_unavailable_chairs_location(date_reservation, start_time, end_time):
     ans = get_all_unavailable_chairs(date_reservation, start_time, end_time)
     if len(ans) == 0:
@@ -106,18 +114,3 @@ def get_unavailable_chairs_location(date_reservation, start_time, end_time):
 # ans2 = get_unavailable_chairs_location("12/12/22", "21:00", "22:00")
 # print(f"s:{ans2}")
 
-"""
-    this function decide if the reservation is now or decided by algorithm.
-    parameters - string that contain JSON (text from client)
-    return - "reservation_now" or "reservation_later" or "error" (must be one of this options)
-
-def choose_flow(parameters):
-    print(parameters)
-    # example for connection to DB:
-    conn = db.connect_db()
-    ans = db.run_select_query("SELECT * FROM users", conn)
-    print(ans)
-    return "reservation_now"
-    # return "reservation_later"
-    # return "error"
-"""

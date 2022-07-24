@@ -11,7 +11,6 @@ import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
 
 class ReservationFirstStepActivity : AppCompatActivity() {
     private var userName: String = ""
@@ -20,7 +19,6 @@ class ReservationFirstStepActivity : AppCompatActivity() {
     private var duration: EditText? = null
     private var sendButton: Button? = null
     private var okHttpClient: OkHttpClient? = null
-    private var myServerResponse: String? = null
     private var reservationLaterMessage: TextView? = null
     private var spinnerDuration: Spinner? = null
     private var myAdapter: ArrayAdapter<String>? = null
@@ -89,11 +87,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
         localButtonClickNext?.isEnabled = false
         nextButton = localButtonClickNext
 
-        var localUserName: EditText? = null
         var localDateReservation: EditText? = null
         var localTimeReservation: EditText? = null
-        var localDuration: EditText? = null
-        //var localDuration: Spinner? = null
         var stringServer: String? = null
         var localDuration2: Spinner? = null
         var localDurationString = ""
@@ -113,10 +108,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             localViewDateTime?.text = ""
             reservationLaterMessage = localViewDateTime
 
-            //localUserName = userName
             localDateReservation = dateReservation
             localTimeReservation = timeReservation
-            localDuration = duration
             localDuration2 = spinnerDuration
             localDurationString = localDuration2!!.selectedItem.toString()
 
@@ -143,10 +136,8 @@ class ReservationFirstStepActivity : AppCompatActivity() {
             }
 
             val reservationBasicDetails = ReservationBasicDetails(
-                //localUserName?.text.toString(),
                 userName,
                 localDateReservation?.text.toString(), localTimeReservation?.text.toString(),
-                //localDuration?.text.toString(),
                 localDurationString,
                 "1"
             )
@@ -213,7 +204,6 @@ class ReservationFirstStepActivity : AppCompatActivity() {
                 i.putExtra("idUserName", userName)
                 i.putExtra("date", localDateReservation?.text.toString())
                 i.putExtra("time", localTimeReservation?.text.toString())
-                //i.putExtra("duration", localDuration?.text.toString())
                 i.putExtra("duration", localDurationString)
                 startActivity(i)
             }
