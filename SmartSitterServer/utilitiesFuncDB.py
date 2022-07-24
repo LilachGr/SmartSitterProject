@@ -63,8 +63,8 @@ def __insert_to_lab(building, room, start_id, end_id, silence_room):
 
 
 """
-    param - list of chairs id
-    return - location_is - int
+    list_id - list of chairs id
+    return - location_ids - int
 """
 def get_location_details(list_id):
     all_ids = "("
