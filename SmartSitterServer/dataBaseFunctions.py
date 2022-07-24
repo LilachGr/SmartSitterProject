@@ -16,11 +16,11 @@ def connect_db():
     function that execute select query.
     parameter:
         query- string that represent correct select query. For example: "SELECT * FROM users"
-        conn- connection that received from the function connect_db()
     return:
         list of all rows that received from the query. 
 """
-def run_select_query(query, conn):
+def run_select_query(query):
+    conn = connect_db()
     with conn.cursor() as cursor:
         print(f"query: {query}")
         cursor.execute(query)
@@ -33,9 +33,9 @@ def run_select_query(query, conn):
     function that execute insert query.
     parameter:
         query- string that represent correct insert query.
-        conn- connection that received from the function connect_db()
 """
-def run_insert_query(query, conn):
+def run_insert_query(query):
+    conn = connect_db()
     with conn.cursor() as cursor:
         print(f"query: {query}")
         cursor.execute(query)

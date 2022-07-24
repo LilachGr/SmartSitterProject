@@ -11,7 +11,7 @@ def insert_to_reservation_table(parameters):
             f"user_id, location_id) VALUES(CONVERT(datetime, '{date}',3), CONVERT(time, '{start_time}')," \
             f"CONVERT(time, '{end_time}'), CONVERT(int, '{duration}'),  CONVERT(int, '{number}')," \
             f"CONVERT(int, '{user}'), {get_location_id(building, room, chair_id)})"
-    run_insert_query(query, connect_db())
+    run_insert_query(query)
 
 
 """
@@ -20,7 +20,7 @@ def insert_to_reservation_table(parameters):
 """
 def get_location_id(building, room, chair_id):
     query = f"select id from labs where building='{building}' and room='{room}' and chairId='{chair_id}'"
-    ans = run_select_query(query, connect_db())
+    ans = run_select_query(query)
     location_id = ans[0][0]
     print("location_id: " + str(location_id))
     return location_id
@@ -39,7 +39,7 @@ def get_all_unavailable_chairs(date, start_time, end_time):
                  f"and CONVERT(time , '{end_time}', 8)) " \
                  f"or (CONVERT(time,DATEADD(MINUTE, 90, start_time),8) between CONVERT(time , '{start_time}', 8) " \
                  f"and CONVERT(time , '{end_time}', 8)))"
-    return run_select_query(query_time, connect_db())
+    return run_select_query(query_time)
 
 
 """
@@ -47,7 +47,7 @@ def get_all_unavailable_chairs(date, start_time, end_time):
 """
 def insert_to_login_table(user, psw, email):
     query = f"INSERT INTO users (user_name, email, pwd) VALUES('{user}', '{email}', '{psw}')"
-    run_insert_query(query, connect_db())
+    run_insert_query(query)
 
 
 """
@@ -59,7 +59,7 @@ def __insert_to_lab(building, room, start_id, end_id, silence_room):
     for chair_id in range(start_id, end_id):
         query = f"INSERT INTO labs (building, room, chairId, silence_room) VALUES('{building}', '{room}', '{chair_id}'" \
                 f", '{silence_room}')"
-        run_insert_query(query, connect_db())
+        run_insert_query(query)
 
 
 """
@@ -76,10 +76,9 @@ def get_location_details(list_id):
         is_first = False
     all_ids += ")"
     query = f"select building, room, chairId, id from labs where id in {all_ids}"
-    ans = run_select_query(query, connect_db())
+    ans = run_select_query(query)
     return ans
 
 
 # __insert_to_lab(604, 202, 1, 13*3+1, 'true')
 # ans = get_all_unavailable_chairs("26/06/22", "21:00", "22:00")
-
